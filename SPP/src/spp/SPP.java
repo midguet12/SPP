@@ -19,7 +19,8 @@ public class SPP {
         //Coordinator coordinator1 = new Coordinator(18012193,"Magt2208","Midguet","Garcia");
         Coordinator coordinator2 = new Coordinator(18012193,"Magt2208");
         
-        coordinator2.getName();
+        String x = coordinator2.getName();
+        System.out.println(x);
         
         
         
