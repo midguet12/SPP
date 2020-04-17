@@ -52,6 +52,7 @@ public class ExceptionLogger{
             timeNow = LocalDateTime.now();
             writeLog.println(timeNow + " - " + errorLine);
             sendEMail("something went wrong at " + timeNow, errorLine);
+            //System.out.println(errorLine);
 
         } 
         catch (IOException exeption) {

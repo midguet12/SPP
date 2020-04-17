@@ -16,12 +16,14 @@ import exceptionlog.ExceptionLogger;
  */
 public class SPP {
     public static void main(String[] args) {
-        Coordinator coordinator1;
-        coordinator1 = new Coordinator(18012193,"Magt2208","Midguet","Garcia");
-   
+        //Coordinator coordinator1 = new Coordinator(18012193,"Magt2208","Midguet","Garcia");
+        Coordinator coordinator2 = new Coordinator(18012193);
         
-       
         
+        
+        
+        
+
     }
     
 }
