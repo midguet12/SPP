@@ -5,7 +5,10 @@
  */
 package spp;
 
+import dataaccess.Coordinator;
 import dataaccess.DataBaseConnection;
+import dataaccess.Encrypter;
+import exceptionlog.ExceptionLogger;
 
 /**
  *
@@ -13,7 +16,12 @@ import dataaccess.DataBaseConnection;
  */
 public class SPP {
     public static void main(String[] args) {
-        DataBaseConnection dbc = new DataBaseConnection();
+        Coordinator coordinator1;
+        coordinator1 = new Coordinator(18012193,"Magt2208","Midguet","Garcia");
+   
+        
+       
+        
     }
     
 }

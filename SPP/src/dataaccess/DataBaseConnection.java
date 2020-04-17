@@ -5,6 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import exceptionlog.ExceptionLogger;
+
+//Hasher
+import java.math.BigInteger;  
+import java.nio.charset.StandardCharsets; 
+import java.security.MessageDigest;  
+import java.security.NoSuchAlgorithmException;  
+
 /**
  *
  * @author midg
@@ -19,18 +28,20 @@ public class DataBaseConnection {
     private String password;
     
     public DataBaseConnection(){
-        user = "seth";
-        password = "#####";
+        user = "midguet";
+        password = "Magt2208";
     }
 
     private void startConnection(){ //Metodo para iniciar conexion
         try{
-            connection = DriverManager.getConnection("jdbc:mysql://midguet.ddns.net:3306/productos?useUnicode=yes&characterEncoding=UTF-8", user, password);
+            connection = DriverManager.getConnection("jdbc:mysql://midguet.ddns.net:3306/spp?useUnicode=yes&characterEncoding=UTF-8", user, password);
             //Conexion a base de datos, driver + servicio de bd + direccion de servidor + puerto + base de datos + se especifica grupo de caracteres + usuario + contraseña
             statement = connection.createStatement();
         }
         catch(SQLException exception){
-            System.out.println(exception.getMessage());
+            String e = exception.getMessage();
+            System.out.println(e);
+            ExceptionLogger.notify(e);
         }
     }
     
@@ -151,5 +162,42 @@ public class DataBaseConnection {
             closeConnection();
         }
     }
+    
+    public void createCoordinator(int personalNumber, String password, String name, String lastname){
+        
+        LocalDate localdate = LocalDate.now();
+        
+        String query = "insert into coordinador(num_personal, contrasena, nombre, apellido_paterno, fecha_registro) values(?,?,?,?,?)";
+        startConnection();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, personalNumber);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, name);
+            preparedStatement.setString(4,lastname);
+            preparedStatement.setString(5, localdate.toString());
+            
+            int rowsWritten = preparedStatement.executeUpdate();
+            
+            if (rowsWritten>0) {
+                System.out.println("Escritura exitosa");    
+            }
+            
+            
+        } catch(Exception exception){
+            System.out.println(exception.getMessage());
+            ExceptionLogger.notify(exception.getMessage());
+        }
+        finally{
+            closeConnection();
+        }
+    
+        
+        
+        
+        
+        
+    }
+    
     
 }

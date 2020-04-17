@@ -1,0 +1,8 @@
+2020-04-17T12:21:57.917 - null
+2020-04-17T12:23:37.016 - Access denied for user 'midguet'@'187.150.110.97' (using password: YES)
+2020-04-17T12:23:44.172 - null
+2020-04-17T12:39:05.969 - Uncompilable source code - missing return statement
+2020-04-17T12:40:51.236 - Uncompilable source code - missing return statement
+2020-04-17T12:46:35.365 - Access denied for user 'midguet'@'187.150.110.97' (using password: YES)
+2020-04-17T12:46:41.649 - null
+2020-04-17T12:46:59.961 - Duplicate entry '18012193' for key 'coordinador.PRIMARY'
