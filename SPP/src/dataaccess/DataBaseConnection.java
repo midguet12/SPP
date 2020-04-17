@@ -5,6 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import exceptionlog.ExceptionLogger;
+
+//Hasher
+import java.math.BigInteger;  
+import java.nio.charset.StandardCharsets; 
+import java.security.MessageDigest;  
+import java.security.NoSuchAlgorithmException;  
+
 /**
  *
  * @author midg
@@ -19,22 +28,28 @@ public class DataBaseConnection {
     private String password;
     
     public DataBaseConnection(){
-        user = "seth";
-        password = "#####";
+        user = "midguet";
+        password = "Magt2208";
     }
 
-    private void startConnection(){ //Metodo para iniciar conexion
+    public Connection startConnection(){ //Metodo para iniciar conexion
+        
         try{
-            connection = DriverManager.getConnection("jdbc:mysql://midguet.ddns.net:3306/productos?useUnicode=yes&characterEncoding=UTF-8", user, password);
+            connection = DriverManager.getConnection("jdbc:mysql://midguet.ddns.net:3306/spp?useUnicode=yes&characterEncoding=UTF-8", user, password);
             //Conexion a base de datos, driver + servicio de bd + direccion de servidor + puerto + base de datos + se especifica grupo de caracteres + usuario + contraseña
             statement = connection.createStatement();
+            //return connection;
+            
         }
         catch(SQLException exception){
-            System.out.println(exception.getMessage());
+            String e = exception.getMessage();
+            System.out.println(e);
+            ExceptionLogger.notify(e);
         }
+        return connection;
     }
     
-    private void closeConnection(){ //Metodo para cerrar conexion 
+    public void closeConnection(){ //Metodo para cerrar conexion 
         if (resultSet != null) {
             try {
                 resultSet.close();
@@ -151,5 +166,8 @@ public class DataBaseConnection {
             closeConnection();
         }
     }
+    
+
+    
     
 }

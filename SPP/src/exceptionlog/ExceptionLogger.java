@@ -52,6 +52,7 @@ public class ExceptionLogger{
             timeNow = LocalDateTime.now();
             writeLog.println(timeNow + " - " + errorLine);
             sendEMail("something went wrong at " + timeNow, errorLine);
+            //System.out.println(errorLine);
 
         } 
         catch (IOException exeption) {
@@ -76,8 +77,8 @@ public class ExceptionLogger{
         smtpPropierties.setProperty("mail.smtep.auth", "true");
               
         Session eMailSession = Session.getDefaultInstance(smtpPropierties);
-        String sender = "exeptionsspp@gmail.com";
-        String password = "#######";
+        String sender = "exceptionsSPP@gmail.com";
+        String password = "03042020asd";
         String receiver = "seth261099@gmail.com";
         String title = eMailTitle;
         String message = eMailBody;
