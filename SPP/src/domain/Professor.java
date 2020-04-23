@@ -44,5 +44,10 @@ public class Professor {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+    @Override
+    public String toString() {
+        return "Professor{" + "personalNumber=" + personalNumber + ", name=" + name + ", middlename=" + middlename + ", lastname=" + lastname + '}';
+    }
     
 }

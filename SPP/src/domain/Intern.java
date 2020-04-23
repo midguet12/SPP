@@ -61,4 +61,10 @@ public class Intern {
     public void setScore(int score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return "Intern{" + "idStudent=" + idStudent + ", name=" + name + ", middlename=" + middlename + ", lastname=" + lastname + ", period=" + period + ", score=" + score + '}';
+    }
+    
 }

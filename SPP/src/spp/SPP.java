@@ -1,16 +1,19 @@
 package spp;
 
-import dataaccess.DataBaseConnection;
+import dataaccess.CoordinatorDAO;
 import domain.Coordinator;
-
 
 public class SPP {
     public static void main(String[] args) {
-        DataBaseConnection dbc = new DataBaseConnection();
-        Coordinator coord = dbc.getCoordinator(18012147);
+        CoordinatorDAO coorDAO = new CoordinatorDAO();
         
-        if(coord != null){
-            System.out.println(coord.getName());
-        }
+        Coordinator coord = new Coordinator(18012148, "Esteban", "Quito", "");
+        System.out.println(coord);
+        coorDAO.insertCoordinator(coord);
+        
+//        coord = coorDAO.getCoordinator(18012147);
+//        if(coord != null){
+//            System.out.println(coord);
+//        }
     }
 }
