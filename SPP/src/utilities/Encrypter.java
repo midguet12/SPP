@@ -1,23 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package utilities;
 
-package dataaccess;
 import java.math.BigInteger;  
 import java.nio.charset.StandardCharsets; 
 import java.security.MessageDigest;  
 import java.security.NoSuchAlgorithmException;  
-import exceptionlog.ExceptionLogger;
-/**
- *
- * @author midgu
- */
+import utilities.ExceptionLogger;
+
 public class Encrypter {
-    
-    public static byte[] getSHA(String input) throws NoSuchAlgorithmException 
-    {  
+    public static byte[] getSHA(String input) throws NoSuchAlgorithmException {  
         // Static getInstance method is called with hashing SHA  
         MessageDigest md = MessageDigest.getInstance("SHA-256");  
   
@@ -27,8 +17,7 @@ public class Encrypter {
         return md.digest(input.getBytes(StandardCharsets.UTF_8));  
     } 
     
-    public static String toHexString(byte[] hash) 
-    { 
+    public static String toHexString(byte[] hash){ 
         // Convert byte array into signum representation  
         BigInteger number = new BigInteger(1, hash);  
   
@@ -40,29 +29,19 @@ public class Encrypter {
         {  
             hexString.insert(0, '0');  
         }  
-  
         return hexString.toString();  
     } 
     
-    
-    
     public static String hasher(String password){
       String hashed = null;
-      try 
-        { 
-           
-            hashed = (toHexString(getSHA(password)));  
+      try{ 
+           hashed = (toHexString(getSHA(password)));  
         } 
-        
-        catch (NoSuchAlgorithmException e) {  
-            System.out.println("Exception thrown for incorrect algorithm: " + e);  
+        catch (NoSuchAlgorithmException e) {   
             ExceptionLogger.notify(e.getMessage());
         } 
         finally{
-          return hashed;
         }
-    }
-    
-    
-    
+        return hashed;
+     }
 }

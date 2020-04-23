@@ -1,23 +1,14 @@
 package dataaccess;
+
+import domain.Coordinator;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import exceptionlog.ExceptionLogger;
+import utilities.ExceptionLogger;
 
-//Hasher
-import java.math.BigInteger;  
-import java.nio.charset.StandardCharsets; 
-import java.security.MessageDigest;  
-import java.security.NoSuchAlgorithmException;  
-
-/**
- *
- * @author midg
- */
 public class DataBaseConnection {
 
     private Connection connection = null;
@@ -32,67 +23,55 @@ public class DataBaseConnection {
         password = "Magt2208";
     }
 
-    public Connection startConnection(){ //Metodo para iniciar conexion
-        
+    private Connection startConnection(){ //Metodo para iniciar conexion
         try{
             connection = DriverManager.getConnection("jdbc:mysql://midguet.ddns.net:3306/spp?useUnicode=yes&characterEncoding=UTF-8", user, password);
             //Conexion a base de datos, driver + servicio de bd + direccion de servidor + puerto + base de datos + se especifica grupo de caracteres + usuario + contraseña
             statement = connection.createStatement();
-            //return connection;
-            
         }
         catch(SQLException exception){
-            String e = exception.getMessage();
-            System.out.println(e);
-            ExceptionLogger.notify(e);
+            ExceptionLogger.notify(exception.getMessage());
         }
         return connection;
     }
     
-    public void closeConnection(){ //Metodo para cerrar conexion 
+    private void closeConnection(){ //Metodo para cerrar conexion 
         if (resultSet != null) {
             try {
                 resultSet.close();
             } 
             catch (SQLException exception) {
-                System.out.println(exception.getMessage());
-                }
+                ExceptionLogger.notify(exception.getMessage());
             }
-            if (statement != null) {
-                try {
-                    statement.close();
-                } 
-                catch (SQLException exception) {
-                    System.out.println(exception.getMessage());
-                }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } 
+            catch (SQLException exception) {
+                ExceptionLogger.notify(exception.getMessage());
             }
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } 
-                catch (SQLException exception) {
-                    System.out.println(exception.getMessage());
-                }
+        }
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } 
+            catch (SQLException exception) {
+                ExceptionLogger.notify(exception.getMessage());
             }
-            //System.out.println("Coneccion cerrada");
-    }    
-
-    public void create(){
-
+        }
+    }
+    
+    public void insertCoordinator(Coordinator coord){
         startConnection();
-
-        String query = "INSERT INTO customers (name, address) VALUES (?, ?)"; //Consulta
+        String query = "insert into coordinador(num_personal, nombre, apellido_paterno) values(?,?,?);"; //Consulta
         
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement(query); //Se convierte consulta a declaracion
-            preparedStatement.setString(1, "Seth"); //Siendo declaracion, defines el valor del interrogante de acuerdo a su posicion con estos metodos
-            preparedStatement.setString(2, "Coatepec");
-           
-            int rowsInserted = preparedStatement.executeUpdate();
-
-            if (rowsInserted > 0) {
-                System.out.println("Se agregó correctamente");
-            }
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setInt(1, coord.getPersonalNumber());
+            preparedStatement.setString(2, coord.getName() );
+            preparedStatement.setString(3, coord.getMiddlename());
         }
         catch (SQLException exception){
             System.out.println(exception.getMessage());
@@ -101,16 +80,22 @@ public class DataBaseConnection {
             closeConnection();
         }
     }
-
-    public void read(){
-
+    public Coordinator getCoordinator(int personalNumber){
         startConnection();
+        Coordinator coord = null;
 
         try{
-            resultSet = statement.executeQuery("Select * from customers");
-            while(resultSet.next()){
-                System.out.println(resultSet.getString("name")+ "," + resultSet.getString("address"));
-            }
+            String query = "Select * from coordinador where num_personal = '"+ String.valueOf(personalNumber) +"';";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            
+            resultSet = preparedStatement.executeQuery(); //Obtencion de datos de consulta
+            resultSet.next();
+            
+            coord = new Coordinator(
+                resultSet.getInt("num_personal"), 
+                resultSet.getString("nombre"),
+                resultSet.getString("apellido_paterno"),
+                resultSet.getString("apellido_materno"));
         } 
         catch (SQLException exception){
             System.out.println(exception.getMessage());
@@ -118,6 +103,7 @@ public class DataBaseConnection {
         finally{
             closeConnection();
         }
+        return coord;
     }
 
     public void update(){
@@ -165,9 +151,6 @@ public class DataBaseConnection {
         finally{
             closeConnection();
         }
-    }
-    
-
-    
+    }   
     
 }
