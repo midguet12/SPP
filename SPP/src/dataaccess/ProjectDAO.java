@@ -116,7 +116,7 @@ public class ProjectDAO {
         
     }
     
-    public void deteleProject(int id_project){
+    public void deleteProject(int id_project){
         connection = dbc.getConnection();
         String query = "Delete from project where id_project = ?";
         
