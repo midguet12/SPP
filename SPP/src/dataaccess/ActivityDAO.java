@@ -38,7 +38,7 @@ public class ActivityDAO {
             dbc.closeConnection();
         }
     }
-    public Activity getActivity(String idActivity){
+    public Activity getActivity(int idActivity){
         Activity activity = null;
         connection = dbc.getConnection();
         String query = "Select * from activity where id_activity = '"+ idActivity +"';";
@@ -66,7 +66,7 @@ public class ActivityDAO {
         return activity;
     }
 
-    public void updateActivity(String idActivity, Activity activity){
+    public void updateActivity(int idActivity, Activity activity){
         connection = dbc.getConnection();
         String query = "UPDATE activity SET id_activity = ?, name = ?, value = ?, description = ?, upload_date = ?, id_intern = ? WHERE id_activity = ?";
         
@@ -79,7 +79,7 @@ public class ActivityDAO {
             preparedStatement.setDate(5, activity.getUploadDate());
             preparedStatement.setString(6, activity.getIdIntern());
             
-            preparedStatement.setString(7, idActivity);
+            preparedStatement.setInt(7, idActivity);
           
             preparedStatement.executeUpdate();
         }
@@ -91,13 +91,13 @@ public class ActivityDAO {
         }
     }
 
-    public void deleteActivity(String idActivity){
+    public void deleteActivity(int idActivity){
         connection = dbc.getConnection();
         String query = "DELETE FROM activity WHERE id_activity = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, idActivity);
+            preparedStatement.setInt(1, idActivity);
             
             preparedStatement.executeUpdate();
         }
