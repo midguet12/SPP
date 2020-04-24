@@ -11,7 +11,7 @@ public class Activity {
     private String idIntern;
     private Date uploadDate;
 
-    public Activity(int id, String name, String description, String value, String filePath, String idIntern, Date uploadDate) {
+    public Activity(int id, String name, String value, String description,  Date uploadDate, String filePath, String idIntern) {
         this.id = id;
         this.name = name;
         this.description = description;

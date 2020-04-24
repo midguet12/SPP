@@ -8,12 +8,12 @@ public class Project {
     private String activities;
     private int duration;
     private String generalObjetive;
-    private String metodologie;
+    private String metodology;
     private String resources;
     private int idManajer;
     private int idOrganization;
 
-    public Project(int id, String name, String description, String responsabilities, String activities, int duration, String generalObjetive, String metodologie, String resources, int idManajer, int idOrganization) {
+    public Project(int id, String name, String description, String responsabilities, String activities, int duration, String generalObjetive, String metodology, String resources, int idManajer, int idOrganization) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -21,7 +21,7 @@ public class Project {
         this.activities = activities;
         this.duration = duration;
         this.generalObjetive = generalObjetive;
-        this.metodologie = metodologie;
+        this.metodology = metodology;
         this.resources = resources;
         this.idManajer = idManajer;
         this.idOrganization = idOrganization;
@@ -88,12 +88,12 @@ public class Project {
         this.generalObjetive = generalObjetive;
     }
 
-    public String getMetodologie() {
-        return metodologie;
+    public String getMetodology() {
+        return metodology;
     }
 
-    public void setMetodologie(String metodologie) {
-        this.metodologie = metodologie;
+    public void setMetodology(String metodologie) {
+        this.metodology = metodologie;
     }
 
     public String getResources() {

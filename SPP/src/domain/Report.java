@@ -11,7 +11,7 @@ public class Report {
     private String idIntern;
     private Date uploadDate;
 
-    public Report(int id, String reportType, String description, String score, String filePath, String idIntern, Date uploadDate) {
+    public Report(int id, String reportType, String description, String filePath, String score, Date uploadDate, String idIntern) {
         this.id = id;
         this.reportType = reportType;
         this.description = description;

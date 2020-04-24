@@ -7,14 +7,16 @@ public class Manager {
     private String lastname;
     private String position;
     private String eMail;
+    private int idOrganization;
 
-    public Manager(int id, String name, String middlename, String lastname, String position, String eMail) {
+    public Manager(int id, String name, String middlename, String lastname, String position, String eMail, int idOrganization) {
         this.id = id;
         this.name = name;
         this.middlename = middlename;
         this.lastname = lastname;
         this.position = position;
         this.eMail = eMail;
+        this.idOrganization = idOrganization;
     }
 
     public Manager(int id, String name) {
@@ -70,10 +72,17 @@ public class Manager {
         this.eMail = eMail;
     }
 
+    public int getIdOrganization() {
+        return idOrganization;
+    }
+
+    public void setIdOrganization(int idOrganization) {
+        this.idOrganization = idOrganization;
+    }
+
     @Override
     public String toString() {
-        return "Manager{" + "id=" + id + ", name=" + name + ", middlename=" + middlename + ", lastname=" + lastname + ", position=" + position + ", eMail=" + eMail + '}';
+        return "Manager{" + "id=" + id + ", name=" + name + ", middlename=" + middlename + ", lastname=" + lastname + ", position=" + position + ", eMail=" + eMail + ", idOrganization=" + idOrganization + '}';
     }
-    
     
 }

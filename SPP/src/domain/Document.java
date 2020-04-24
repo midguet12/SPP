@@ -9,7 +9,7 @@ public class Document {
     private String idIntern;
     private Date uploadDate;
 
-    public Document(int id, String documentType, String filePath, String idIntern, Date uploadDate) {
+    public Document(int id, String filePath, String documentType, String idIntern, Date uploadDate) {
         this.id = id;
         this.documentType = documentType;
         this.filePath = filePath;
