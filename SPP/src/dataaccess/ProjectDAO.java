@@ -15,7 +15,7 @@ public class ProjectDAO {
 
     public ProjectDAO() {
         dbc = new DataBaseConnection();
-    }
+    }   
     
     public void insertProject(Project project){
         connection = dbc.getConnection();
@@ -39,6 +39,7 @@ public class ProjectDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -77,6 +78,7 @@ public class ProjectDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ExceptionLogger.notify(ex.getMessage());
         }finally{
             dbc.closeConnection();
             
@@ -108,6 +110,7 @@ public class ProjectDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ExceptionLogger.notify(ex.getMessage());
         } finally{
             dbc.closeConnection();
         }
@@ -129,6 +132,7 @@ public class ProjectDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ExceptionLogger.notify(ex.getMessage());
         } finally{
             dbc.closeConnection();
         }

@@ -18,7 +18,7 @@ public class OrganizationDAO {
     
     public void insertOrganization(Organization organization){
         connection = dbc.getConnection();
-        String query = "insert into organization values(?, ?, ?, ?, ?, ?, ?, ?);"; //Consulta
+        String query = "insert into organization values(?, ?, ?, ?, ?, ?, ?, ?);"; 
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -33,8 +33,8 @@ public class OrganizationDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -61,8 +61,9 @@ public class OrganizationDAO {
                 resultSet.getString("Adress"));
                 
         } 
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
+
         }
         finally{
             dbc.closeConnection();
@@ -89,8 +90,8 @@ public class OrganizationDAO {
           
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -107,8 +108,8 @@ public class OrganizationDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch(SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch(SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();

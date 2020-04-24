@@ -32,8 +32,8 @@ public class ReportDAO {
 
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -59,8 +59,8 @@ public class ReportDAO {
                 resultSet.getString("id_intern"));
                 
         } 
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -86,8 +86,8 @@ public class ReportDAO {
           
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -104,8 +104,8 @@ public class ReportDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch(SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch(SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();

@@ -33,8 +33,8 @@ public class UserDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -63,8 +63,8 @@ public class UserDAO {
                 resultSet.getString("type"));
                 
         } 
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -91,8 +91,8 @@ public class UserDAO {
           
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -109,8 +109,8 @@ public class UserDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch(SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch(SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
