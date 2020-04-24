@@ -10,10 +10,10 @@ public class Project {
     private String generalObjetive;
     private String metodology;
     private String resources;
-    private int idManajer;
+    private int idManager;
     private int idOrganization;
 
-    public Project(int id, String name, String description, String responsabilities, String activities, int duration, String generalObjetive, String metodology, String resources, int idManajer, int idOrganization) {
+    public Project(int id, String name, String description, String responsabilities, String activities, int duration, String generalObjetive, String metodology, String resources, int idManager, int idOrganization) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -23,7 +23,7 @@ public class Project {
         this.generalObjetive = generalObjetive;
         this.metodology = metodology;
         this.resources = resources;
-        this.idManajer = idManajer;
+        this.idManager = idManager;
         this.idOrganization = idOrganization;
     }
 
@@ -99,12 +99,12 @@ public class Project {
         this.resources = resources;
     }
 
-    public int getIdManajer() {
-        return idManajer;
+    public int getIdManager() {
+        return idManager;
     }
 
-    public void setIdManajer(int idManajer) {
-        this.idManajer = idManajer;
+    public void setIdManager(int idManager) {
+        this.idManager = idManager;
     }
 
     public int getIdOrganization() {
@@ -117,7 +117,7 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" + "id=" + id + ", name=" + name + ", description=" + description + ", responsabilities=" + responsabilities + ", activities=" + activities + ", duration=" + duration + ", generalObjetive=" + generalObjetive + ", metodologie=" + metodology + ", resources=" + resources + ", idManajer=" + idManajer + ", idOrganization=" + idOrganization + '}';
+        return "Project{" + "id=" + id + ", name=" + name + ", description=" + description + ", responsabilities=" + responsabilities + ", activities=" + activities + ", duration=" + duration + ", generalObjetive=" + generalObjetive + ", metodologie=" + metodology + ", resources=" + resources + ", idManajer=" + idManager + ", idOrganization=" + idOrganization + '}';
     }
     
 }

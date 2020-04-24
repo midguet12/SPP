@@ -46,8 +46,16 @@ public class UserDAO {
         String query = "Select * from user where id_user = '"+ idUser +"';";
 
         try{
+<<<<<<< HEAD
             PreparedStatement preparedStatement = connection.prepareStatement(query);        
             resultSet = preparedStatement.executeQuery(); 
+=======
+            //String query = "Select * from user where id_user = '"+ idUser +"';";
+            String query = "Select * from user LEFT JOIN user_type ON user.id_type = user_type.id_type where id_user = " +idUser+ ";";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            
+            resultSet = preparedStatement.executeQuery(); //Obtencion de datos de consulta
+>>>>>>> join
             resultSet.next();
             
             user = new User(
@@ -58,7 +66,7 @@ public class UserDAO {
                 resultSet.getString("password"),
                 resultSet.getString("email"),
                 resultSet.getString("phone_number"),
-                resultSet.getInt("id_type"));
+                resultSet.getString("type"));
                 
         } 
         catch (SQLException exception){
