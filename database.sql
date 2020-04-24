@@ -145,3 +145,5 @@ SELECT * FROM user LEFT JOIN user_type ON user.id_type = user_type.id_type;
 Select * from user LEFT JOIN user_type ON user.id_type = user_type.id_type where id_user = 18012193;
 
 Select * from user where id_user = 18012193 INNER JOIN user_type ON user.id_type = user_type.id_type;
+
+Select * from project left join user_type
