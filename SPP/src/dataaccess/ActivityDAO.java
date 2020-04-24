@@ -41,10 +41,11 @@ public class ActivityDAO {
     public Activity getActivity(int idActivity){
         Activity activity = null;
         connection = dbc.getConnection();
-        String query = "Select * from activity where id_activity = '"+ idActivity +"';";
+        String query = "Select * from activity where id_activity = ?;";
 
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement(query);        
+            PreparedStatement preparedStatement = connection.prepareStatement(query);  
+            preparedStatement.setInt(1, idActivity);
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             

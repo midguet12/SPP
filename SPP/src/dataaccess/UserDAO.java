@@ -44,11 +44,11 @@ public class UserDAO {
         User user = null;
         connection = dbc.getConnection();
         //String query = "Select * from user where id_user = " +idUser+ ";";        
-        String query = "Select * from user LEFT JOIN user_type ON user.id_type = user_type.id_type where id_user = " +idUser+ ";";
+        String query = "Select * from user LEFT JOIN user_type ON user.id_type = user_type.id_type where id_user = ?;";
 
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            
+            preparedStatement.setString(1, idUser);
             resultSet = preparedStatement.executeQuery(); //Obtencion de datos de consulta
             resultSet.next();
             

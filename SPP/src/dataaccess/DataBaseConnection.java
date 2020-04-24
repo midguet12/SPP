@@ -15,8 +15,8 @@ public class DataBaseConnection {
         try{
             connection = DriverManager.getConnection("jdbc:mysql://midguet.ddns.net:3306/spp?useUnicode=yes&characterEncoding=UTF-8", user, password);
         }
-        catch(SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch(SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
     }
     
@@ -32,8 +32,8 @@ public class DataBaseConnection {
                     connection.close();
                 }
             }
-            catch(SQLException exception){
-                ExceptionLogger.notify(exception.getMessage());
+            catch(SQLException ex){
+                ExceptionLogger.notify(ex.getMessage());
             }
         }
     }  

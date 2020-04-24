@@ -42,10 +42,11 @@ public class ReportDAO {
     public Report getReport(int idReport){
         Report report = null;
         connection = dbc.getConnection();
-        String query = "Select * from report where id_report = '"+ idReport +"';";
+        String query = "Select * from report where id_report = ?;";
 
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement(query);        
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, idReport);
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
