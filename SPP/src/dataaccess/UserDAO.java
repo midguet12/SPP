@@ -84,7 +84,7 @@ public class UserDAO {
             preparedStatement.setString(5, user.getPassword());
             preparedStatement.setString(6, user.geteMail());
             preparedStatement.setString(7, user.getPhoneNumber());
-            preparedStatement.setInt(8, user.getUserType());.
+            preparedStatement.setInt(8, user.getUserType());
             
             preparedStatement.setString(9, idUser);
             
