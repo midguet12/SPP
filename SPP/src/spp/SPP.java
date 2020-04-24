@@ -6,7 +6,7 @@ import domain.User;
 public class SPP {
     public static void main(String[] args) {
         //User user = new User("s18012147", "Seth", "Diaz", "Diaz", "asdfad", "seth@algo.com", "2283578547", 1);
-        User user = new User();
+        User user = null;
         
         //System.out.println(user);
         

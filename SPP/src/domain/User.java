@@ -10,10 +10,6 @@ public class User {
     private String phoneNumber;
     private int userType;
     private String type;
-    
-    public User(){
-        
-    }
 
     public User(String idUser, String name, String middlename, String lastname, String password, String eMail, String phoneNumber, int userType) {
         this.idUser = idUser;
