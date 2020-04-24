@@ -6,12 +6,12 @@ public class Report {
     private int id;
     private String reportType;
     private String description;
-    private String score;
+    private int score;
     private String filePath;
     private String idIntern;
     private Date uploadDate;
 
-    public Report(int id, String reportType, String description, String filePath, String score, Date uploadDate, String idIntern) {
+    public Report(int id, String reportType, String description, String filePath, int score, Date uploadDate, String idIntern) {
         this.id = id;
         this.reportType = reportType;
         this.description = description;
@@ -45,11 +45,11 @@ public class Report {
         this.description = description;
     }
 
-    public String getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
