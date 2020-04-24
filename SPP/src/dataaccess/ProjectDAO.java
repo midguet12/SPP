@@ -57,9 +57,9 @@ public class ProjectDAO {
        
             
         try {
-            String query = "Select * from project";
+            String query = "Select * from project where id_project = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            
+            preparedStatement.setInt(1, id_project);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             
