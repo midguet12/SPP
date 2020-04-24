@@ -40,14 +40,13 @@ public class UserDAO {
         }
     }
     public User getUser(String idUser){
-        connection = dbc.getConnection();
         User user = null;
+        connection = dbc.getConnection();
+        String query = "Select * from user where id_user = '"+ idUser +"';";
 
         try{
-            String query = "Select * from user where id_user = '"+ idUser +"';";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            
-            resultSet = preparedStatement.executeQuery(); //Obtencion de datos de consulta
+            PreparedStatement preparedStatement = connection.prepareStatement(query);        
+            resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
             user = new User(
@@ -86,7 +85,7 @@ public class UserDAO {
             preparedStatement.setInt(8, user.getUserType());
             
             preparedStatement.setString(9, idUser);
-            
+          
             preparedStatement.executeUpdate();
         }
         catch (SQLException exception){
