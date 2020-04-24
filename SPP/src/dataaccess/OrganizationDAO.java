@@ -43,10 +43,11 @@ public class OrganizationDAO {
     public Organization getOrganization(String idOrganization){
         Organization organization = null;
         connection = dbc.getConnection();
-        String query = "Select * from organization where id_organization = '"+ idOrganization +"';";
+        String query = "Select * from organization where id_organization = '?';";
 
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement(query);        
+            PreparedStatement preparedStatement = connection.prepareStatement(query);   
+            preparedStatement.setString(1, idOrganization);
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
