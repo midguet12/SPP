@@ -4,12 +4,12 @@ import java.sql.Date;
 
 public class Document {
     private int id;
-    private String documentType;
+    private int documentType;
     private String filePath;
     private String idIntern;
     private Date uploadDate;
 
-    public Document(int id, String filePath, String documentType, String idIntern, Date uploadDate) {
+    public Document(int id, String filePath, Date uploadDate, String idIntern, int documentType) {
         this.id = id;
         this.documentType = documentType;
         this.filePath = filePath;
@@ -25,11 +25,11 @@ public class Document {
         this.id = id;
     }
 
-    public String getDocumentType() {
+    public int getDocumentType() {
         return documentType;
     }
 
-    public void setDocumentType(String documentType) {
+    public void setDocumentType(int documentType) {
         this.documentType = documentType;
     }
 
