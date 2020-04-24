@@ -21,11 +21,6 @@ public class Report {
         this.uploadDate = uploadDate;
     }
 
-    public Report(int id, String reportType) {
-        this.id = id;
-        this.reportType = reportType;
-    }
-
     public int getId() {
         return id;
     }

@@ -17,12 +17,6 @@ public class Document {
         this.uploadDate = uploadDate;
     }
 
-    public Document(int id, String documentType) {
-        this.id = id;
-        this.documentType = documentType;
-    }
-    
-
     public int getIdDocument() {
         return id;
     }

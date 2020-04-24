@@ -19,11 +19,6 @@ public class Manager {
         this.idOrganization = idOrganization;
     }
 
-    public Manager(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public int getId() {
         return id;
     }

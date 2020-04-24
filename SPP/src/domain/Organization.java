@@ -21,11 +21,6 @@ public class Organization {
         this.address = address;
     }
 
-    public Organization(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public int getId() {
         return id;
     }

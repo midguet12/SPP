@@ -27,11 +27,6 @@ public class Project {
         this.idOrganization = idOrganization;
     }
 
-    public Project(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public int getId() {
         return id;
     }
