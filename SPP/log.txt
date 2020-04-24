@@ -40,3 +40,25 @@
 2020-04-17T17:05:30.821 - Column 'num_peronal' not found.
 2020-04-17T17:11:51.863 - Column 'num_personal' not found.
 2020-04-17T17:25:38.775 - Column 'num_personal' not found.
+2020-04-24T16:54:06.295 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T16:55:14.593 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:00:27.797 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:01:36.235 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:04:28.427 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:06:09.561 - Illegal operation on empty result set.
+2020-04-24T17:07:13.432 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:10:03.383 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:10:11.337 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:10:52.323 - Could not connect to SMTP host: smtp.gmail.com, port: 587
+2020-04-24T17:10:31.277 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:11:46.298 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:11:54.384 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:13:12.136 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:14:34.790 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:14:42.978 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:15:41.943 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:16:00.631 - Illegal operation on empty result set.
+2020-04-24T17:17:46.600 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:17:55.010 - Duplicate entry '1' for key 'activity.PRIMARY'
+2020-04-24T17:18:43.844 - Illegal operation on empty result set.
+2020-04-24T17:18:54.738 - Duplicate entry '1' for key 'activity.PRIMARY'
