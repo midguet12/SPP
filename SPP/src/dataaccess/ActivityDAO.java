@@ -31,8 +31,8 @@ public class ActivityDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -58,8 +58,8 @@ public class ActivityDAO {
                 resultSet.getString("id_intern"));
                 
         } 
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -84,8 +84,8 @@ public class ActivityDAO {
           
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -102,8 +102,8 @@ public class ActivityDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch(SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch(SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();

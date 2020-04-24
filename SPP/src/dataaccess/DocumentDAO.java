@@ -30,8 +30,8 @@ public class DocumentDAO {
 
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -40,10 +40,11 @@ public class DocumentDAO {
     public Document getDocument(int idDocument){
         Document document = null;
         connection = dbc.getConnection();
-        String query = "Select * from document where id_document = '"+ idDocument +"';";
+        String query = "Select * from document where id_document = ?;";
 
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement(query);        
+            PreparedStatement preparedStatement = connection.prepareStatement(query);    
+            preparedStatement.setInt(1, idDocument);
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
@@ -55,8 +56,8 @@ public class DocumentDAO {
                 resultSet.getInt("document_type"));
                 
         } 
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -80,14 +81,14 @@ public class DocumentDAO {
           
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
         }
     }
-
+            
     public void deleteDocument(int idDocument){
         connection = dbc.getConnection();
         String query = "DELETE FROM document WHERE id_document = ?";
@@ -98,8 +99,8 @@ public class DocumentDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch(SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch(SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
