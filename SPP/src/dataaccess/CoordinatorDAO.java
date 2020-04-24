@@ -21,7 +21,7 @@ public class CoordinatorDAO {
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, coord.getPersonalNumber());
+            preparedStatement.setString(1, coord.getPersonalNumber());
             preparedStatement.setString(2, coord.getName() );
             preparedStatement.setString(3, coord.getMiddlename());
             
@@ -46,7 +46,7 @@ public class CoordinatorDAO {
             resultSet.next();
             
             coord = new Coordinator(
-                resultSet.getInt("num_personal"), 
+                resultSet.getString("num_personal"), 
                 resultSet.getString("nombre"),
                 resultSet.getString("apellido_paterno"),
                 resultSet.getString("apellido_materno"));

@@ -1,23 +1,27 @@
 package domain;
 
 public class Professor { 
-    private int personalNumber;
+    private String personalNumber;
     private String name;
     private String middlename;
     private String lastname;
-        
-    public Professor(int personalNumber, String name, String middlename, String lastname){
+    private String turn;
+    private String eMail;
+
+    public Professor(String personalNumber, String name, String middlename, String lastname, String turn, String eMail) {
         this.personalNumber = personalNumber;
         this.name = name;
         this.middlename = middlename;
         this.lastname = lastname;
+        this.turn = turn;
+        this.eMail = eMail;
     }
 
-    public int getPersonalNumber() {
+    public String getPersonalNumber() {
         return personalNumber;
     }
 
-    public void setPersonalNumber(int personalNumber) {
+    public void setPersonalNumber(String personalNumber) {
         this.personalNumber = personalNumber;
     }
 
@@ -45,9 +49,25 @@ public class Professor {
         this.lastname = lastname;
     }
 
+    public String getTurn() {
+        return turn;
+    }
+
+    public void setTurn(String turn) {
+        this.turn = turn;
+    }
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
     @Override
     public String toString() {
-        return "Professor{" + "personalNumber=" + personalNumber + ", name=" + name + ", middlename=" + middlename + ", lastname=" + lastname + '}';
+        return "Professor{" + "personalNumber=" + personalNumber + ", name=" + name + ", middlename=" + middlename + ", lastname=" + lastname + ", turn=" + turn + ", eMail=" + eMail + '}';
     }
     
 }
