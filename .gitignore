@@ -1,1 +1,5 @@
-SPP/build/
+#Java compiled file
+*.class
+
+#Errores log
+log.txt
