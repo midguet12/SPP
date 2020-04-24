@@ -141,3 +141,5 @@ insert into user(id_user, name, middlename, lastname, password, email, phone_num
 	('96853214', 'Angel Juan', 'Sanchez','Garcia', 'AJSG24042020','angelj@gmail.com','9639781452',1);
 
 SELECT * FROM user INNER JOIN user_type ON user.id_type = user_type.id_type;
+
+Select * from user where id_user = '"+ idUser +"' INNER JOIN user_type ON user.id_type = user_type.id_type;

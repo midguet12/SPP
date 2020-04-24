@@ -9,6 +9,11 @@ public class User {
     private String eMail;
     private String phoneNumber;
     private int userType;
+    private String type;
+    
+    public User(){
+        
+    }
 
     public User(String idUser, String name, String middlename, String lastname, String password, String eMail, String phoneNumber, int userType) {
         this.idUser = idUser;
@@ -19,7 +24,22 @@ public class User {
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
         this.userType = userType;
+        
     }
+    
+    public User(String idUser, String name, String middlename, String lastname, String password, String eMail, String phoneNumber, String type) {
+        this.idUser = idUser;
+        this.password = password;
+        this.name = name;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.eMail = eMail;
+        this.phoneNumber = phoneNumber;
+        this.type = type;
+        
+    }
+    
+    
 
     public String getIdUser() {
         return idUser;
@@ -87,7 +107,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "idUser=" + idUser + ", password=" + password + ", name=" + name + ", middlename=" + middlename + ", lastname=" + lastname + ", eMail=" + eMail + ", phoneNumber=" + phoneNumber + ", userType=" + userType + '}';
+        return "User{" + "idUser=" + idUser + ", password=" + password + ", name=" + name + ", middlename=" + middlename + ", lastname=" + lastname + ", eMail=" + eMail + ", phoneNumber=" + phoneNumber + ", userType=" + type + '}';
     }
         
 }
