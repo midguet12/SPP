@@ -24,5 +24,4 @@ public class DataBaseConnectionTest {
         dbc.closeConnection();
         assertTrue(connection.isClosed());
     }
-    
 }
