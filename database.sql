@@ -70,6 +70,9 @@ create table user(
 	primary key(id_user)
 );
 
+
+
+
 create table document(
 	id_document INTEGER auto_increment not null,
 	file_path VARCHAR(200) not null,
@@ -128,4 +131,12 @@ insert into user_type(type) values
 	('Practicante')
 ;
 
+
+ALTER TABLE user ADD CONSTRAINT FK_user_type1 FOREIGN KEY (id_type) REFERENCES user_type(id_type);
+
+insert into user(id_user, name, middlename, lastname, password, email, phone_number, id_type) values 
+	('18012193', 'Midguet Arturo','Garcia','Torres', 'Magt2208','midguet12@hotmail.com','9982935090',3),
+	('18014123', 'Seth Noe', 'Diaz', 'Diaz', 'Sndd1026','seth@hotmail.com','7422859674',3),
+	('45129636', 'Juan Carlos', 'Perez','Arriaga', 'JCPA26042020','elrevo@gmail.com','4152967896',2),
+	('96853214', 'Angel Juan', 'Sanchez','Garcia', 'AJSG24042020','angelj@gmail.com','9639781452',1);
 
