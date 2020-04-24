@@ -1,6 +1,6 @@
 package dataaccess;
 
-import domain.User;
+import domain.Document;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,21 +16,18 @@ public class DocumentDAO {
         dbc = new DataBaseConnection();
     }
     
-    public void insertUser(User user){
+    public void insertDocument(Document document){
         connection = dbc.getConnection();
-        String query = "insert into user values(?, ?, ?, ?, ?, ?, ?, ?);"; //Consulta
+        String query = "insert into document values(?, ?, ?, ?, ?);"; //Consulta
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, user.getIdUser());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getMiddlename());
-            preparedStatement.setString(4, user.getLastname());
-            preparedStatement.setString(5, user.getPassword());
-            preparedStatement.setString(6, user.geteMail());
-            preparedStatement.setString(7, user.getPhoneNumber());
-            preparedStatement.setInt(8, user.getUserType());
-            
+            preparedStatement.setInt(1, document.getIdDocument());
+            preparedStatement.setString(2, document.getFilePath());
+            preparedStatement.setDate(3, document.getUploadDate());
+            preparedStatement.setString(4, document.getIdIntern());
+            preparedStatement.setInt(5, document.getDocumentType());
+
             preparedStatement.executeUpdate();
         }
         catch (SQLException exception){
@@ -40,25 +37,22 @@ public class DocumentDAO {
             dbc.closeConnection();
         }
     }
-    public User getUser(String idUser){
-        User user = null;
+    public Document getDocument(int idDocument){
+        Document document = null;
         connection = dbc.getConnection();
-        String query = "Select * from user where id_user = '"+ idUser +"';";
+        String query = "Select * from document where id_document = '"+ idDocument +"';";
 
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);        
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
-            user = new User(
-                resultSet.getString("id_user"), 
-                resultSet.getString("name"),
-                resultSet.getString("middlename"),
-                resultSet.getString("lastname"),
-                resultSet.getString("password"),
-                resultSet.getString("email"),
-                resultSet.getString("phone_number"),
-                resultSet.getInt("id_type"));
+            document = new Document(
+                resultSet.getInt("id_document"), 
+                resultSet.getString("file_path"),
+                resultSet.getDate("upload_date"),
+                resultSet.getString("id_intern"),
+                resultSet.getInt("document_type"));
                 
         } 
         catch (SQLException exception){
@@ -67,25 +61,22 @@ public class DocumentDAO {
         finally{
             dbc.closeConnection();
         }
-        return user;
+        return document;
     }
 
-    public void updateUser(String idUser, User user){
+    public void updateDocument(int idDocument, Document document){
         connection = dbc.getConnection();
-        String query = "UPDATE user SET id_user = ?, name = ?, middlename = ?, lastname  = ?, password = ?, email = ?, phone_number = ?, id_type = ? WHERE id_user = ?";
+        String query = "UPDATE document SET id_document = ?, file_path = ?, upload_date = ?, id_intern = ?, document_type = ? WHERE id_document = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, user.getIdUser());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getMiddlename());
-            preparedStatement.setString(4, user.getLastname());
-            preparedStatement.setString(5, user.getPassword());
-            preparedStatement.setString(6, user.geteMail());
-            preparedStatement.setString(7, user.getPhoneNumber());
-            preparedStatement.setInt(8, user.getUserType());
+            preparedStatement.setInt(1, document.getIdDocument());
+            preparedStatement.setString(2, document.getFilePath());
+            preparedStatement.setDate(3, document.getUploadDate());
+            preparedStatement.setString(4, document.getIdIntern());
+            preparedStatement.setInt(5, document.getDocumentType());
             
-            preparedStatement.setString(9, idUser);
+            preparedStatement.setInt(6, idDocument);
           
             preparedStatement.executeUpdate();
         }
@@ -97,13 +88,13 @@ public class DocumentDAO {
         }
     }
 
-    public void deleteUser(String idUser){
+    public void deleteDocument(int idDocument){
         connection = dbc.getConnection();
-        String query = "DELETE FROM user WHERE id_user = ?";
+        String query = "DELETE FROM document WHERE id_document = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, idUser);
+            preparedStatement.setInt(1, idDocument);
             
             preparedStatement.executeUpdate();
         }
