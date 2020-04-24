@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import utilities.ExceptionLogger;
 
 public class UserDAO {
     private final DataBaseConnection dbc;
@@ -33,7 +34,7 @@ public class UserDAO {
             preparedStatement.executeUpdate();
         }
         catch (SQLException exception){
-            System.out.println(exception.getMessage());
+            ExceptionLogger.notify(exception.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -61,7 +62,7 @@ public class UserDAO {
                 
         } 
         catch (SQLException exception){
-            System.out.println(exception.getMessage());
+            ExceptionLogger.notify(exception.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -89,7 +90,7 @@ public class UserDAO {
             preparedStatement.executeUpdate();
         }
         catch (SQLException exception){
-            System.out.println(exception.getMessage());
+            ExceptionLogger.notify(exception.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -107,7 +108,7 @@ public class UserDAO {
             preparedStatement.executeUpdate();
         }
         catch(SQLException exception){
-            System.out.println(exception.getMessage());
+            ExceptionLogger.notify(exception.getMessage());
         }
         finally{
             dbc.closeConnection();
