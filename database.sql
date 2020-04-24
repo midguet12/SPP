@@ -1,118 +1,124 @@
 create database spp;
 use spp;
 
-create table proyecto(
-	id_proyecto integer auto_increment not null,
-	nombre_proyecto varchar(30) not null,
-	id_organizacion integer not null,
-	id_encargado integer not null,
-	objetivo_general varchar(30) not null,
-	objetivo_inmediato varchar(30),
-	objetivo_mediato varchar(30),
-	descripcion varchar(500) not null,
-	metodologia varchar(50),
-	recursos varchar(50),
-	estado varchar(50),
-	responsabilidades varchar(50),
-	duracion_meses integer,
-	num_personal integer,
-	primary key(id_proyecto)
+create table organizacion(
+	id_organization INTEGER auto_increment not null,
+	name VARCHAR(30) not null,	
+	sector VARCHAR(20),
+	email VARCHAR(30) not null,
+	phone_number VARCHAR(30) not null,
+	id_state INTEGER not null,
+	city VARCHAR(30) not null,
+	address VARCHAR(30) not null,
+	primary key(id_organization)
 );
 
-create table practicante(
-	matricula varchar(10) not null,
-	contrasena varchar(64) not null,
-	nombre varchar(50) not null,
-	apellido_paterno varchar(50) not null,
-	apellido_materno varchar(50),
-	calificacion integer,
-	periodo varchar(20),
-	num_personal integer,
-	id_proyecto integer,
+
+create table proyecto(
+	id_project INTEGER auto_increment not null,
+	project_name VARCHAR(30) not null,
+	description VARCHAR(50),
+	responsabilities VARCHAR(50),
+	activities VARCHAR(50),
+	duration INTEGER,
+	general_objective VARCHAR(30),
+	metodology VARCHAR(50),
+	resources VARCHAR(30),
+	id_project_manager INTEGER,
+	id_organization INTEGER,
+	primary key(id_project)
+);
+
+create table intern(
+	id_intern VARCHAR(15) not null,
+	period VARCHAR(20),
+	grade INTEGER,
+	id_project INTEGER not null,
 	primary key (matricula)
 );
 
-create table organizacion(
-	id_organizacion integer auto_increment not null,
-	nombre varchar(50) not null,	
-	sector varchar(30),
-	usuarios_directos varchar(30),
-	usuarios_indirectos varchar(30),
-	email varchar(30) not null,
-	telefono varchar(13) not null,
-	estado varchar(30),
-	ciudad varchar(30),
-	direccion varchar(30),
-	primary key(id_organizacion)
+create table report(
+	id_report integer auto_increment not null,
+	report_type VARCHAR(15) not null,
+	description VARCHAR(200),
+	filepath VARCHAR(100) not null,
+	grade INTEGER,
+	upload_date DATE not null,
+	id_intern VARCHAR(15) not null,
+	primary key(id_report)
 );
 
-create table coordinador(
-	num_personal integer not null,
-	contrasena varchar(64) not null,
-	nombre varchar(50) not null,
-	apellido_paterno varchar(50) not null,
-	apellido_materno varchar(50),
-	fecha_registro Date not null,
-	fecha_baja Date,
-	primary key(num_personal)
+create table activity(
+	id_activity INTEGER auto_increment not null,
+	name VARCHAR(20) not null,
+	value VARCHAR(20) not null,
+	description VARCHAR(30),
+	upload_date DATE not null,
+	id_intern VARCHAR(15) not null,
+	primary key(id_activity)
 );
 
-create table profesor(
-	num_personal integer not null,
-	contrasena varchar(64) not null,
-	nombre varchar(50) not null,
-	apellido_paterno varchar(50) not null,
-	apellido_materno varchar(50),
-	fecha_registro Date not null,
-	fecha_baja Date,
-	primary key(num_personal)
+create table user(
+	id_user VARCHAR(15) not null,
+	name VARCHAR(30) not null,
+	middlename VARCHAR(30) not null,
+	lastname VARCHAR(30),
+	password VARCHAR(64) not null,
+	email VARCHAR(50) not null,
+	phone_number VARCHAR(14) not null,
+	id_type VARCHAR(20) not null,
+	primary key(id_user)
 );
 
-create table encargado(
-	id_encargado integer auto_increment not null,
-	id_organizacion integer not null,
-	nombre varchar(50) not null,
-	apellido_paterno varchar(50) not null,
-	apellido_materno varchar(50),
-	cargo varchar(20),
-	email varchar(50),
-	primary key(id_encargado)
+create table document(
+	id_document INTEGER auto_increment not null,
+	file_path VARCHAR(200) not null,
+	upload_date	DATE not null,
+	id_intern VARCHAR(15),
+	document_type INTEGER,
+	primary key(id_document)
+);
+
+create table project_manager(
+	id_project INTEGER,
+	id_manager INTEGER,
+);
+
+create table state(
+	id_state INTEGER,
+	state VARCHAR(35),
+	primary key(id_state)
+);
+
+
+create table manager(
+	id_manager INTEGER auto_increment not null,
+	name VARCHAR(30) not null,
+	middlename VARCHAR(30) not null,
+	lastname VARCHAR(30)-,
+	position VARCHAR(30)-,
+	email VARCHAR(50) not null,
+	id_organization INTEGER not null,
+	primary key(id_manager)
+);
+
+create table user_type(
+	id_type INTEGER auto_increment not null,
+	type VARCHAR(15) not null
 
 );
 
-create table reporte(
-	id_reporte integer auto_increment not null,
-	actividades varchar(30),
-	archivo_reporte varchar(30),
-	calificacion integer,
-	realizacion Date,
-	entrega Date,
-	matricula varchar(10),
-	primary key(id_reporte)
+create table document_type(
+	id_type INTEGER auto_increment not null,
+	type VARCHAR(15) not null
+	
 );
 
-create table reporte_parcial(
-	id_reporteparcial integer auto_increment not null,
-	observaciones varchar(500),
-	horas_cubiertas integer,
-	num_reporte integer not null,
-	resultados_obtenidos integer,
-	primary key(id_reporteparcial)
+create table report_type(
+	id_type INTEGER auto_increment not null,
+	type VARCHAR(15) not null
+	
 );
 
-create table actividades(
-	id_actividad integer auto_increment not null,
-	matricula integer not null,
-	nombre varchar(20) not null,
-	descripcion varchar(200),
-	valor integer,
-	entrega Date,
-	direccion varchar(100),
-	primary key(id_actividad)
-);
 
-create table actividad(
-	id_actividad integer auto_increment not null,
-	actividad varchar(50) not null,
-	primary key(id_actividad)
-);
+
