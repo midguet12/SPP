@@ -61,11 +61,11 @@ public class Organization {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getState() {
+    public int getIdState() {
         return idState;
     }
 
-    public void setState(int idState) {
+    public void setIdState(int idState) {
         this.idState = idState;
     }
 
