@@ -39,6 +39,4 @@
 2020-04-17T17:04:36.084 - Column 'num_peronal' not found.
 2020-04-17T17:05:30.821 - Column 'num_peronal' not found.
 2020-04-17T17:11:51.863 - Column 'num_personal' not found.
-2020-04-17T17:15:31.319 - Column 'num_personal' not found.
-2020-04-17T17:15:48.780 - Column 'num_personal' not found.
-2020-04-17T17:15:57.510 - Column 'num_personal' not found.
+2020-04-17T17:25:38.775 - Column 'num_personal' not found.

@@ -1,35 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package spp;
 
-import dataaccess.Coordinator;
-import dataaccess.DataBaseConnection;
-import dataaccess.Encrypter;
-import exceptionlog.ExceptionLogger;
+import dataaccess.UserDAO;
+import domain.User;
 
-/**
- *
- * @author SNDD_
- */
 public class SPP {
     public static void main(String[] args) {
-        //Coordinator coordinator1 = new Coordinator(18012193,"Magt2208","Midguet","Garcia");
-        Coordinator coordinator2 = new Coordinator(18012193,"Magt2208");
+        User user = new User("s18012147", "Seth", "Diaz", "Diaz", "asdfad", "seth@algo.com", "2283578547", 1);
+        System.out.println(user);
         
-        String x = coordinator2.getName();
-        System.out.println(x);
+        UserDAO userDAO = new UserDAO();
+//        userDAO.insertUser(user);
         
-        
-        
-        
-        
-        
-        
-        
-
+        user = userDAO.getUser("s18012147");
+        System.out.println(user);
     }
-    
 }

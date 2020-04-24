@@ -1,4 +1,4 @@
-package exceptionlog;
+package utilities;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -52,7 +52,7 @@ public class ExceptionLogger{
             timeNow = LocalDateTime.now();
             writeLog.println(timeNow + " - " + errorLine);
             sendEMail("something went wrong at " + timeNow, errorLine);
-            System.out.println(errorLine);
+            //System.out.println(errorLine);
 
         } 
         catch (IOException exeption) {
