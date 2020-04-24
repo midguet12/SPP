@@ -85,13 +85,13 @@ public class InternDAO {
         }
     }
 
-    public void deleteIntern(String idIntern){
+    public void deleteIntern(int idIntern){
         connection = dbc.getConnection();
         String query = "DELETE FROM intern WHERE id_intern = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, idIntern);
+            preparedStatement.setInt(1, idIntern);
             
             preparedStatement.executeUpdate();
         }
