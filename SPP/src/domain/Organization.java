@@ -6,11 +6,11 @@ public class Organization {
     private String sector;
     private String eMail;
     private String phoneNumber;
-    private String State;
+    private int State;
     private String city;
     private String address;
 
-    public Organization(int id, String name, String sector, String eMail, String phoneNumber, String State, String city, String address) {
+    public Organization(int id, String name, String sector, String eMail, String phoneNumber, int State, String city, String address) {
         this.id = id;
         this.name = name;
         this.sector = sector;
@@ -61,11 +61,11 @@ public class Organization {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getState() {
+    public int getState() {
         return State;
     }
 
-    public void setState(String State) {
+    public void setState(int State) {
         this.State = State;
     }
 
