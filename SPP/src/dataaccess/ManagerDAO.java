@@ -32,8 +32,8 @@ public class ManagerDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -42,10 +42,11 @@ public class ManagerDAO {
     public Manager getManager(int idManager){
         Manager manager = null;
         connection = dbc.getConnection();
-        String query = "Select * from manager where id_manager = '"+ idManager +"';";
+        String query = "Select * from manager where id_manager = ?;";
 
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);        
+            preparedStatement.setInt(1, idManager);
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
@@ -59,8 +60,8 @@ public class ManagerDAO {
                 resultSet.getInt("id_organization"));
                 
         } 
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -86,8 +87,8 @@ public class ManagerDAO {
           
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -104,8 +105,8 @@ public class ManagerDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch(SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch(SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();

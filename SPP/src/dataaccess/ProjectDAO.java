@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utilities.ExceptionLogger;
+
 
 public class ProjectDAO {
     private final DataBaseConnection dbc;
@@ -15,7 +17,7 @@ public class ProjectDAO {
 
     public ProjectDAO() {
         dbc = new DataBaseConnection();
-    }
+    }   
     
     public void insertProject(Project project){
         connection = dbc.getConnection();
@@ -39,6 +41,7 @@ public class ProjectDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -54,9 +57,9 @@ public class ProjectDAO {
        
             
         try {
-            String query = "Select * from project";
+            String query = "Select * from project where id_project = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            
+            preparedStatement.setInt(1, id_project);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             
@@ -77,6 +80,7 @@ public class ProjectDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ExceptionLogger.notify(ex.getMessage());
         }finally{
             dbc.closeConnection();
             
@@ -108,6 +112,7 @@ public class ProjectDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ExceptionLogger.notify(ex.getMessage());
         } finally{
             dbc.closeConnection();
         }
@@ -129,6 +134,7 @@ public class ProjectDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ExceptionLogger.notify(ex.getMessage());
         } finally{
             dbc.closeConnection();
         }

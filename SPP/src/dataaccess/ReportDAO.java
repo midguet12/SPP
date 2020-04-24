@@ -32,8 +32,8 @@ public class ReportDAO {
 
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -42,10 +42,11 @@ public class ReportDAO {
     public Report getReport(int idReport){
         Report report = null;
         connection = dbc.getConnection();
-        String query = "Select * from report where id_report = '"+ idReport +"';";
+        String query = "Select * from report where id_report = ?;";
 
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement(query);        
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, idReport);
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
@@ -59,8 +60,8 @@ public class ReportDAO {
                 resultSet.getString("id_intern"));
                 
         } 
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -86,8 +87,8 @@ public class ReportDAO {
           
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -104,8 +105,8 @@ public class ReportDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch(SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch(SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();

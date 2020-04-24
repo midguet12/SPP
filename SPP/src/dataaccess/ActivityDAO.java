@@ -31,8 +31,8 @@ public class ActivityDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -41,10 +41,11 @@ public class ActivityDAO {
     public Activity getActivity(int idActivity){
         Activity activity = null;
         connection = dbc.getConnection();
-        String query = "Select * from activity where id_activity = '"+ idActivity +"';";
+        String query = "Select * from activity where id_activity = ?;";
 
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement(query);        
+            PreparedStatement preparedStatement = connection.prepareStatement(query);  
+            preparedStatement.setInt(1, idActivity);
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
@@ -57,8 +58,8 @@ public class ActivityDAO {
                 resultSet.getString("id_intern"));
                 
         } 
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -83,8 +84,8 @@ public class ActivityDAO {
           
             preparedStatement.executeUpdate();
         }
-        catch (SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch (SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
@@ -101,8 +102,8 @@ public class ActivityDAO {
             
             preparedStatement.executeUpdate();
         }
-        catch(SQLException exception){
-            ExceptionLogger.notify(exception.getMessage());
+        catch(SQLException ex){
+            ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
