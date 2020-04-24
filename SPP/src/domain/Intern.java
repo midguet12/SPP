@@ -1,24 +1,24 @@
 package domain;
 
 public class Intern{ 
-    private String idInter;
+    private String idIntern;
     private String period;
     private int grade;
     private int idProject;
 
-    public Intern(String idInter, String period, int grade, int idProject) {
-        this.idInter = idInter;
+    public Intern(String idIntern, String period, int grade, int idProject) {
+        this.idIntern = idIntern;
         this.period = period;
         this.grade = grade;
         this.idProject = idProject;
     }
 
-    public String getIdInter() {
-        return idInter;
+    public String getIdIntern() {
+        return idIntern;
     }
 
-    public void setIdInter(String idInter) {
-        this.idInter = idInter;
+    public void setIdIntern(String idIntern) {
+        this.idIntern = idIntern;
     }
 
     public String getPeriod() {
@@ -47,7 +47,7 @@ public class Intern{
 
     @Override
     public String toString() {
-        return "Intern{" + "idInter=" + idInter + ", period=" + period + ", grade=" + grade + ", idProject=" + idProject + '}';
+        return "Intern{" + "idIntern=" + idIntern + ", period=" + period + ", grade=" + grade + ", idProject=" + idProject + '}';
     }
     
     
