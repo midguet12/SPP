@@ -70,50 +70,48 @@ public class UserDAO {
         return user;
     }
 
-//    public void update(){
-//
-//        dbc.startConnection();
-//
-//        String query = "UPDATE customers SET name=? WHERE name=?";
-//        
-//        try{
-//            PreparedStatement preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setString(1, "Midguet");
-//            preparedStatement.setString(2, "Seth");
-//           
-//            int rowsInserted = preparedStatement.executeUpdate();
-//            if (rowsInserted > 0) {
-//                System.out.println("Se edito correctamente");
-//            }
-//        }
-//        catch (SQLException exception){
-//            System.out.println(exception.getMessage());
-//        }
-//        finally{
-//            dbc.closeConnection();
-//        }
-//    }
-//
-//    public void delete(){
-//
-//        dbc.startConnection();
-//
-//        String query = "DELETE FROM customers WHERE name=?";
-//        
-//        try{
-//            PreparedStatement preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setString(1,"Seth");
-//            
-//            int rowsDeleted = preparedStatement.executeUpdate();
-//            if(rowsDeleted>0){
-//                System.out.println("Se elimino correctamente");
-//            }
-//        }
-//        catch(SQLException exception){
-//            System.out.println(exception.getMessage());
-//        }
-//        finally{
-//            dbc.closeConnection();
-//        }
-//    }   
+    public void updateUser(String idUser, User user){
+        connection = dbc.getConnection();
+        String query = "UPDATE user SET id_user = ?, name = ?, middlename = ?, lastname  = ?, password = ?, email = ?, phone_number = ?, id_type = ? WHERE id_user = ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user.getIdUser());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3, user.getMiddlename());
+            preparedStatement.setString(4, user.getLastname());
+            preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setString(6, user.geteMail());
+            preparedStatement.setString(7, user.getPhoneNumber());
+            preparedStatement.setInt(8, user.getUserType());
+            
+            preparedStatement.setString(9, idUser);
+            
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        finally{
+            dbc.closeConnection();
+        }
+    }
+
+    public void deleteUser(String idUser){
+        connection = dbc.getConnection();
+        String query = "DELETE FROM user WHERE id_user = ?";
+        
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, idUser);
+            
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException exception){
+            System.out.println(exception.getMessage());
+        }
+        finally{
+            dbc.closeConnection();
+        }
+    }   
 }
