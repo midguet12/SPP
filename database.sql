@@ -24,7 +24,7 @@ create table project(
 	general_objective VARCHAR(30),
 	metodology VARCHAR(50),
 	resources VARCHAR(30),
-	id_project_manager INTEGER,
+	id_manager INTEGER,
 	id_organization INTEGER,
 	primary key(id_project)
 );
@@ -82,10 +82,6 @@ create table document(
 	primary key(id_document)
 );
 
-create table project_manager(
-	id_project INTEGER,
-	id_manager INTEGER
-);
 
 create table state(
 	id_state INTEGER,
@@ -133,6 +129,9 @@ insert into user_type(type) values
 
 
 ALTER TABLE user ADD CONSTRAINT FK_user_type1 FOREIGN KEY (id_type) REFERENCES user_type(id_type);
+alter table project add CONSTRAINT  fk_project_manager FOREIGN key (id_manager) REFERENCES manager(id_manager);
+alter table project add CONSTRAINT fk_project_organization FOREIGN key (id_organization) REFERENCES organization(id_organization);
+
 
 insert into user(id_user, name, middlename, lastname, password, email, phone_number, id_type) values 
 	('18012193', 'Midguet Arturo','Garcia','Torres', 'Magt2208','midguet12@hotmail.com','9982935090',3),
@@ -140,10 +139,16 @@ insert into user(id_user, name, middlename, lastname, password, email, phone_num
 	('45129636', 'Juan Carlos', 'Perez','Arriaga', 'JCPA26042020','elrevo@gmail.com','4152967896',2),
 	('96853214', 'Angel Juan', 'Sanchez','Garcia', 'AJSG24042020','angelj@gmail.com','9639781452',1);
 
-SELECT * FROM user LEFT JOIN user_type ON user.id_type = user_type.id_type;
+insert into project(project_name, description, id_manager,id_organization)
+	('Cloud','Servicio de nube', )
+
 
 Select * from user LEFT JOIN user_type ON user.id_type = user_type.id_type where id_user = 18012193;
 
-Select * from user where id_user = 18012193 INNER JOIN user_type ON user.id_type = user_type.id_type;
 
-Select * from project left join user_type
+
+
+
+
+
+Select * from project left join manager on project.id_manager = manager.id_manager where id_project = 1;
