@@ -6,17 +6,17 @@ public class Organization {
     private String sector;
     private String eMail;
     private String phoneNumber;
-    private int State;
+    private int idState;
     private String city;
     private String address;
 
-    public Organization(int id, String name, String sector, String eMail, String phoneNumber, int State, String city, String address) {
+    public Organization(int id, String name, String sector, String eMail, String phoneNumber, int idState, String city, String address) {
         this.id = id;
         this.name = name;
         this.sector = sector;
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
-        this.State = State;
+        this.idState = idState;
         this.city = city;
         this.address = address;
     }
@@ -53,20 +53,20 @@ public class Organization {
         this.eMail = eMail;
     }
 
-    public String getPhonenumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhonenumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     public int getState() {
-        return State;
+        return idState;
     }
 
-    public void setState(int State) {
-        this.State = State;
+    public void setState(int idState) {
+        this.idState = idState;
     }
 
     public String getCity() {
@@ -87,7 +87,7 @@ public class Organization {
 
     @Override
     public String toString() {
-        return "Organization{" + "id=" + id + ", name=" + name + ", sector=" + sector + ", eMail=" + eMail + ", phoneNumber=" + phoneNumber + ", State=" + State + ", city=" + city + ", address=" + address + '}';
+        return "Organization{" + "id=" + id + ", name=" + name + ", sector=" + sector + ", eMail=" + eMail + ", phoneNumber=" + phoneNumber + ", idState=" + idState + ", city=" + city + ", address=" + address + '}';
     }
     
 }
