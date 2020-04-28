@@ -12,5 +12,33 @@ public class GetDAOTest {
         ActivityDAO activityDAO = new ActivityDAO();
         
         assertEquals("Testing getActivity() ", "Homework", activityDAO.getActivity(1).getName());
+    }
+ 
+    @Test
+    public void testGetDocument(){
+    }
+    
+    @Test
+    public void testGetIntern(){
+    }
+        
+    @Test
+    public void testGetManager(){
+    }
+        
+    @Test
+    public void testGetOrganization(){
+    }
+        
+    @Test
+    public void testGetProject(){
+    }
+        
+    @Test
+    public void testGetReport(){
+    }
+        
+    @Test
+    public void testGetUser(){
     }    
 }

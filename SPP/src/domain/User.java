@@ -33,9 +33,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.type = type;
         
-    }
-    
-    
+    }  
 
     public String getIdUser() {
         return idUser;
