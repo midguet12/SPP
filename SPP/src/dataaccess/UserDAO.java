@@ -16,7 +16,8 @@ public class UserDAO {
         dbc = new DataBaseConnection();
     }
     
-    public void insertUser(User user){
+    public int insertUser(User user){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "insert into user values(?, ?, ?, ?, ?, ?, ?, ?);"; //Consulta
         
@@ -31,7 +32,7 @@ public class UserDAO {
             preparedStatement.setString(7, user.getPhoneNumber());
             preparedStatement.setInt(8, user.getUserType());
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -39,6 +40,7 @@ public class UserDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
     public User getUser(String idUser){
         User user = null;
@@ -72,7 +74,8 @@ public class UserDAO {
         return user;
     }
 
-    public void updateUser(String idUser, User user){
+    public int updateUser(String idUser, User user){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE user SET id_user = ?, name = ?, middlename = ?, lastname  = ?, password = ?, email = ?, phone_number = ?, id_type = ? WHERE id_user = ?";
         
@@ -89,7 +92,7 @@ public class UserDAO {
             
             preparedStatement.setString(9, idUser);
           
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -97,9 +100,11 @@ public class UserDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
 
-    public void deleteUser(String idUser){
+    public int deleteUser(String idUser){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "DELETE FROM user WHERE id_user = ?";
         
@@ -107,7 +112,7 @@ public class UserDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, idUser);
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -115,5 +120,6 @@ public class UserDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }   
 }

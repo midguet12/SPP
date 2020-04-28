@@ -49,6 +49,7 @@ public class ActivityDAO {
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);  
             preparedStatement.setInt(1, idActivity);
+            
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
@@ -58,8 +59,7 @@ public class ActivityDAO {
                 resultSet.getString("value"),
                 resultSet.getString("description"),
                 resultSet.getDate("upload_date"),
-                resultSet.getString("id_intern"));
-                
+                resultSet.getString("id_intern"));              
         } 
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());

@@ -16,7 +16,8 @@ public class ManagerDAO {
         dbc = new DataBaseConnection();
     }
     
-    public void insertManager(Manager manager){
+    public int insertManager(Manager manager){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "insert into manager values(?, ?, ?, ?, ?, ?, ?);"; //Consulta
         
@@ -30,7 +31,7 @@ public class ManagerDAO {
             preparedStatement.setString(6, manager.geteMail());
             preparedStatement.setInt(8, manager.getIdOrganization());
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -38,6 +39,7 @@ public class ManagerDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
     public Manager getManager(int idManager){
         Manager manager = null;
@@ -47,6 +49,7 @@ public class ManagerDAO {
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);        
             preparedStatement.setInt(1, idManager);
+            
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
@@ -57,8 +60,7 @@ public class ManagerDAO {
                 resultSet.getString("lastname"),
                 resultSet.getString("position"),
                 resultSet.getString("email"),
-                resultSet.getInt("id_organization"));
-                
+                resultSet.getInt("id_organization"));                
         } 
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -69,7 +71,8 @@ public class ManagerDAO {
         return manager;
     }
 
-    public void updateManager(int idManager, Manager manager){
+    public int updateManager(int idManager, Manager manager){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE manager SET id_manager = ?, name = ?, middlename = ?, lastname  = ?, position = ?, email = ?, id_type = ? WHERE id_manager = ?";
         
@@ -85,7 +88,7 @@ public class ManagerDAO {
             
             preparedStatement.setInt(8, idManager);
           
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -93,9 +96,11 @@ public class ManagerDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
 
-    public void deleteManager(int idManager){
+    public int deleteManager(int idManager){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "DELETE FROM manager WHERE id_manager = ?";
         
@@ -103,7 +108,7 @@ public class ManagerDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, idManager);
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -111,5 +116,6 @@ public class ManagerDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }   
 }

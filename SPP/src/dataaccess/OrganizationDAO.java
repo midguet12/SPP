@@ -16,7 +16,8 @@ public class OrganizationDAO {
         dbc = new DataBaseConnection();
     }
     
-    public void insertOrganization(Organization organization){
+    public int insertOrganization(Organization organization){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "insert into organization values(?, ?, ?, ?, ?, ?, ?, ?);"; 
         
@@ -31,7 +32,7 @@ public class OrganizationDAO {
             preparedStatement.setString(7, organization.getPhoneNumber());
             preparedStatement.setString(8, organization.getAddress());
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -39,6 +40,7 @@ public class OrganizationDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
     public Organization getOrganization(String idOrganization){
         Organization organization = null;
@@ -48,6 +50,7 @@ public class OrganizationDAO {
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);   
             preparedStatement.setString(1, idOrganization);
+            
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
@@ -59,12 +62,10 @@ public class OrganizationDAO {
                 resultSet.getString("phone_number"),
                 resultSet.getInt("id_state"),
                 resultSet.getString("City"), 
-                resultSet.getString("Adress"));
-                
+                resultSet.getString("Adress"));                
         } 
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
-
         }
         finally{
             dbc.closeConnection();
@@ -72,7 +73,8 @@ public class OrganizationDAO {
         return organization;
     }
 
-    public void updateOrganization(String idOrganization, Organization organization){
+    public int updateOrganization(String idOrganization, Organization organization){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE organization SET id_organization = ?, name = ?, sector = ?, email = ?, phone_number = ?, id_state = ?, city = ?, adress = ? WHERE id_organization = ?";
         
@@ -89,7 +91,7 @@ public class OrganizationDAO {
             
             preparedStatement.setString(9, idOrganization);
           
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -97,9 +99,11 @@ public class OrganizationDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
 
-    public void deleteOrganization(int idOrganization){
+    public int deleteOrganization(int idOrganization){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "DELETE FROM organization WHERE id_organization = ?";
         
@@ -107,7 +111,7 @@ public class OrganizationDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, idOrganization);
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -115,5 +119,6 @@ public class OrganizationDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }   
 }

@@ -16,7 +16,8 @@ public class ReportDAO {
         dbc = new DataBaseConnection();
     }
     
-    public void insertReport(Report report){
+    public int insertReport(Report report){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "insert into report values(?, ?, ?, ?, ?, ?, ?);"; //Consulta
         
@@ -30,7 +31,7 @@ public class ReportDAO {
             preparedStatement.setDate(6, report.getUploadDate());
             preparedStatement.setString(7, report.getIdIntern());
 
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -38,6 +39,7 @@ public class ReportDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
     public Report getReport(int idReport){
         Report report = null;
@@ -58,7 +60,6 @@ public class ReportDAO {
                 resultSet.getInt("score"),
                 resultSet.getDate("upload_date"),
                 resultSet.getString("id_intern"));
-                
         } 
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -69,7 +70,8 @@ public class ReportDAO {
         return report;
     }
 
-    public void updateReport(int idReport, Report report){
+    public int updateReport(int idReport, Report report){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE report SET id_report = ?,  report_type = ?, description = ?, file_path = ?, score = ?, upload_date = ?, id_intern = ? WHERE id_report = ?";
         
@@ -85,7 +87,7 @@ public class ReportDAO {
             
             preparedStatement.setInt(8, idReport);
           
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -93,9 +95,11 @@ public class ReportDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
 
-    public void deleteReport(int idReport){
+    public int deleteReport(int idReport){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "DELETE FROM report WHERE id_report = ?";
         
@@ -103,7 +107,7 @@ public class ReportDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, idReport);
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -111,5 +115,6 @@ public class ReportDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }   
 }

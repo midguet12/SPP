@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utilities.ExceptionLogger;
 
 
@@ -19,7 +17,8 @@ public class ProjectDAO {
         dbc = new DataBaseConnection();
     }   
     
-    public void insertProject(Project project){
+    public int insertProject(Project project){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "insert into project values (?,?,?,?,?,?,?,?,?,?);";
         
@@ -36,62 +35,55 @@ public class ProjectDAO {
             preparedStatement.setInt(9, project.getIdManager());
             preparedStatement.setInt(10, project.getIdOrganization());
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
             
             
         } catch (SQLException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
             ExceptionLogger.notify(ex.getMessage());
         }
         finally{
             dbc.closeConnection();
         }
-        
-        
+        return affectedRows;
     }
     
-    public Project getProject(int id_project){
+    public Project getProject(int id){
         connection = dbc.getConnection();
         Project project = null;
-        
-       
             
         try {
             String query = "Select * from project where id_project = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id_project);
+            preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             
             project = new Project(
-                    resultSet.getInt("id_project"),
-                    resultSet.getString("project_name"),
-                    resultSet.getString("description"),
-                    resultSet.getString("responsabilities"),
-                    resultSet.getString("activities"),
-                    resultSet.getInt("duration"),
-                    resultSet.getString("general_objective"),
-                    resultSet.getString("metodology"),
-                    resultSet.getString("resources"),
-                    resultSet.getInt("id_manager"),
-                    resultSet.getInt("id_organization"));
-            
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+                resultSet.getInt("id_project"),
+                resultSet.getString("project_name"),
+                resultSet.getString("description"),
+                resultSet.getString("responsabilities"),
+                resultSet.getString("activities"),
+                resultSet.getInt("duration"),
+                resultSet.getString("general_objective"),
+                resultSet.getString("metodology"),
+                resultSet.getString("resources"),
+                resultSet.getInt("id_manager"),
+                resultSet.getInt("id_organization"));   
+        } 
+        catch (SQLException ex) {
             ExceptionLogger.notify(ex.getMessage());
-        }finally{
-            dbc.closeConnection();
-            
         }
-        return project;
-      
+        finally{
+            dbc.closeConnection();
+        }
+        return project;     
     }
     
-    public void updateProject(int id_project,Project project){
+    public int updateProject(int id,Project project){
+        int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "update project set id_project = ?, project_name = ?, description = ?, responsabilities = ?, activities = ?, duration = ?, general_objective = ?, metodology = ?, resources = ?, id_manager = ?, id_organization = ?";
+        String query = "update project set id_project = ?, project_name = ?, description = ?, responsabilities = ?, activities = ?, duration = ?, general_objective = ?, metodology = ?, resources = ?, id_manager = ?, id_organization = ? where id_project = ?";
         
         
         try {
@@ -108,45 +100,36 @@ public class ProjectDAO {
             preparedStatement.setInt(9, project.getIdManager());
             preparedStatement.setInt(10, project.getIdOrganization());
             
-            preparedStatement.executeUpdate();
+            preparedStatement.setInt(11, id);
             
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-            ExceptionLogger.notify(ex.getMessage());
-        } finally{
-            dbc.closeConnection();
+            affectedRows = preparedStatement.executeUpdate();
         }
-        
-        
-        
+        catch (SQLException ex) {
+            ExceptionLogger.notify(ex.getMessage());
+        }
+        finally{
+            dbc.closeConnection();
+        }     
+        return affectedRows;
     }
     
-    public void deleteProject(int id_project){
+    public int deleteProject(int id_project){
+         int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "Delete from project where id_project = ?";
-        
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id_project);
             
-            preparedStatement.executeUpdate();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+            affectedRows = preparedStatement.executeUpdate();
+        } 
+        catch (SQLException ex) {
             ExceptionLogger.notify(ex.getMessage());
-        } finally{
+        }
+        finally{
             dbc.closeConnection();
         }
-        
-        
+        return affectedRows;
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }

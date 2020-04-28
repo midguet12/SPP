@@ -16,7 +16,8 @@ public class InternDAO {
         dbc = new DataBaseConnection();
     }
     
-    public void insertIntern(Intern intern){
+    public int insertIntern(Intern intern){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "insert into intern values(?, ?, ?, ?);"; //Consulta
         
@@ -27,7 +28,7 @@ public class InternDAO {
             preparedStatement.setInt(3, intern.getGrade());
             preparedStatement.setInt(4, intern.getIdProject());
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -35,6 +36,7 @@ public class InternDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
     public Intern getIntern(String idIntern){
         Intern intern = null;
@@ -44,6 +46,7 @@ public class InternDAO {
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query); 
             preparedStatement.setString(1, idIntern);
+            
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
@@ -51,8 +54,7 @@ public class InternDAO {
                 resultSet.getString("id_intern"), 
                 resultSet.getString("period"),
                 resultSet.getInt("grade"),
-                resultSet.getInt("id_project"));
-                
+                resultSet.getInt("id_project"));                
         } 
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -63,7 +65,8 @@ public class InternDAO {
         return intern;
     }
 
-    public void updateIntern(String idIntern, Intern intern){
+    public int updateIntern(String idIntern, Intern intern){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE intern SET id_intern = ?, period = ?, grade = ?, id_project = ? WHERE id_intern = ?";
         
@@ -76,7 +79,7 @@ public class InternDAO {
             
             preparedStatement.setString(5, idIntern);
           
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -84,9 +87,11 @@ public class InternDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
 
-    public void deleteIntern(int idIntern){
+    public int deleteIntern(int idIntern){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "DELETE FROM intern WHERE id_intern = ?";
         
@@ -94,7 +99,7 @@ public class InternDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, idIntern);
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){ 
             ExceptionLogger.notify(ex.getMessage());
@@ -102,5 +107,6 @@ public class InternDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }   
 }

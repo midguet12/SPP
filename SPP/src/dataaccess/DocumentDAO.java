@@ -16,7 +16,8 @@ public class DocumentDAO {
         dbc = new DataBaseConnection();
     }
     
-    public void insertDocument(Document document){
+    public int insertDocument(Document document){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "insert into document values(?, ?, ?, ?, ?);"; //Consulta
         
@@ -28,7 +29,7 @@ public class DocumentDAO {
             preparedStatement.setString(4, document.getIdIntern());
             preparedStatement.setInt(5, document.getDocumentType());
 
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -36,6 +37,7 @@ public class DocumentDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
     public Document getDocument(int idDocument){
         Document document = null;
@@ -45,6 +47,7 @@ public class DocumentDAO {
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);    
             preparedStatement.setInt(1, idDocument);
+            
             resultSet = preparedStatement.executeQuery(); 
             resultSet.next();
             
@@ -53,8 +56,7 @@ public class DocumentDAO {
                 resultSet.getString("file_path"),
                 resultSet.getDate("upload_date"),
                 resultSet.getString("id_intern"),
-                resultSet.getInt("document_type"));
-                
+                resultSet.getInt("document_type"));                
         } 
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -65,7 +67,8 @@ public class DocumentDAO {
         return document;
     }
 
-    public void updateDocument(int idDocument, Document document){
+    public int updateDocument(int idDocument, Document document){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE document SET id_document = ?, file_path = ?, upload_date = ?, id_intern = ?, document_type = ? WHERE id_document = ?";
         
@@ -79,7 +82,7 @@ public class DocumentDAO {
             
             preparedStatement.setInt(6, idDocument);
           
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -87,9 +90,11 @@ public class DocumentDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }
             
-    public void deleteDocument(int idDocument){
+    public int deleteDocument(int idDocument){
+        int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "DELETE FROM document WHERE id_document = ?";
         
@@ -97,7 +102,7 @@ public class DocumentDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, idDocument);
             
-            preparedStatement.executeUpdate();
+            affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){
             ExceptionLogger.notify(ex.getMessage());
@@ -105,5 +110,6 @@ public class DocumentDAO {
         finally{
             dbc.closeConnection();
         }
+        return affectedRows;
     }   
 }
