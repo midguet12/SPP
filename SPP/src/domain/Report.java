@@ -6,16 +6,16 @@ public class Report {
     private int id;
     private String reportType;
     private String description;
-    private int score;
+    private int grade;
     private String filePath;
     private String idIntern;
     private Date uploadDate;
 
-    public Report(int id, String reportType, String description, String filePath, int score, Date uploadDate, String idIntern) {
+    public Report(int id, String reportType, String description, String filePath, int grade, Date uploadDate, String idIntern) {
         this.id = id;
         this.reportType = reportType;
         this.description = description;
-        this.score = score;
+        this.grade = grade;
         this.filePath = filePath;
         this.idIntern = idIntern;
         this.uploadDate = uploadDate;
@@ -45,12 +45,12 @@ public class Report {
         this.description = description;
     }
 
-    public int getScore() {
-        return score;
+    public int getGrade() {
+        return grade;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setGrade(int grade) {
+        this.grade = grade;
     }
 
     public String getFilePath() {
@@ -79,7 +79,7 @@ public class Report {
 
     @Override
     public String toString() {
-        return "Report{" + "id=" + id + ", reportType=" + reportType + ", description=" + description + ", score=" + score + ", filePath=" + filePath + ", idIntern=" + idIntern + ", uploadDate=" + uploadDate + '}';
+        return "Report{" + "id=" + id + ", reportType=" + reportType + ", description=" + description + ", grade=" + grade + ", filePath=" + filePath + ", idIntern=" + idIntern + ", uploadDate=" + uploadDate + '}';
     }
     
     
