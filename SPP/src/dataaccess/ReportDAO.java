@@ -73,7 +73,7 @@ public class ReportDAO {
     public int updateReport(int idReport, Report report){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "UPDATE report SET id_report = ?,  id_type = ?, description = ?, file_path = ?, score = ?, upload_date = ?, id_intern = ? WHERE id_report = ?";
+        String query = "UPDATE report SET id_report = ?,  id_type = ?, description = ?, filepath = ?, grade = ?, upload_date = ?, id_intern = ? WHERE id_report = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -81,7 +81,7 @@ public class ReportDAO {
             preparedStatement.setString(2, report.getReportType());
             preparedStatement.setString(3, report.getDescription());
             preparedStatement.setString(4, report.getFilePath());
-            preparedStatement.setInt(4, report.getGrade());
+            preparedStatement.setInt(5, report.getGrade());
             preparedStatement.setDate(6, report.getUploadDate());
             preparedStatement.setString(7, report.getIdIntern());
             

@@ -90,18 +90,19 @@ public class ProjectDAO {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
            
-            preparedStatement.setString(1, project.getName());
-            preparedStatement.setString(2, project.getDescription());
-            preparedStatement.setString(3, project.getResponsabilities());
-            preparedStatement.setString(4, project.getActivities());
-            preparedStatement.setInt(5, project.getDuration());
-            preparedStatement.setString(6, project.getGeneralObjetive());
-            preparedStatement.setString(7, project.getMetodology());
-            preparedStatement.setString(8, project.getResources());
-            preparedStatement.setInt(9, project.getIdManager());
-            preparedStatement.setInt(10, project.getIdOrganization());
+            preparedStatement.setInt(1, project.getId());
+            preparedStatement.setString(2, project.getName());
+            preparedStatement.setString(3, project.getDescription());
+            preparedStatement.setString(4, project.getResponsabilities());
+            preparedStatement.setString(5, project.getActivities());
+            preparedStatement.setInt(6, project.getDuration());
+            preparedStatement.setString(7, project.getGeneralObjetive());
+            preparedStatement.setString(8, project.getMetodology());
+            preparedStatement.setString(9, project.getResources());
+            preparedStatement.setInt(10, project.getIdManager());
+            preparedStatement.setInt(11, project.getIdOrganization());
             
-            preparedStatement.setInt(11, id);
+            preparedStatement.setInt(12, id);
             
             affectedRows = preparedStatement.executeUpdate();
         }

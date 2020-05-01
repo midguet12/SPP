@@ -126,3 +126,4 @@ java.sql.SQLException: No value specified for parameter 5
 2020-05-01T18:14:16.046 - Unknown column 'id_type' in 'field list' at dataaccess.ManagerDAO
 2020-05-01T18:14:44.421 - No value specified for parameter 12 at dataaccess.ProjectDAO
 2020-05-01T18:15:00.549 - No value specified for parameter 5 at dataaccess.ReportDAO
+2020-05-01T18:39:52.039 - dataaccess.ReportDAO: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'file_path' in 'field list'

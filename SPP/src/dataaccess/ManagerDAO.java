@@ -74,7 +74,7 @@ public class ManagerDAO {
     public int updateManager(int idManager, Manager manager){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "UPDATE manager SET id_manager = ?, name = ?, middlename = ?, lastname  = ?, position = ?, email = ?, id_type = ? WHERE id_manager = ?";
+        String query = "UPDATE manager SET id_manager = ?, name = ?, middlename = ?, lastname  = ?, position = ?, email = ?, id_organization = ? WHERE id_manager = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
