@@ -33,7 +33,7 @@ public class ActivityDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -62,7 +62,7 @@ public class ActivityDAO {
                 resultSet.getString("id_intern"));              
         } 
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -89,7 +89,7 @@ public class ActivityDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -109,7 +109,7 @@ public class ActivityDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();

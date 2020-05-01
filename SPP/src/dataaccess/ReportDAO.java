@@ -27,14 +27,14 @@ public class ReportDAO {
             preparedStatement.setString(2, report.getReportType());
             preparedStatement.setString(3, report.getDescription());
             preparedStatement.setString(4, report.getFilePath());
-            preparedStatement.setInt(5, report.getScore());
+            preparedStatement.setInt(5, report.getGrade());
             preparedStatement.setDate(6, report.getUploadDate());
             preparedStatement.setString(7, report.getIdIntern());
 
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -54,15 +54,15 @@ public class ReportDAO {
             
             report = new Report(
                 resultSet.getInt("id_report"), 
-                resultSet.getString("report_type"),
+                resultSet.getString("id_type"),
                 resultSet.getString("description"),
                 resultSet.getString("filepath"),
-                resultSet.getInt("score"),
+                resultSet.getInt("grade"),
                 resultSet.getDate("upload_date"),
                 resultSet.getString("id_intern"));
         } 
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -73,15 +73,15 @@ public class ReportDAO {
     public int updateReport(int idReport, Report report){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "UPDATE report SET id_report = ?,  report_type = ?, description = ?, file_path = ?, score = ?, upload_date = ?, id_intern = ? WHERE id_report = ?";
+        String query = "UPDATE report SET id_report = ?,  id_type = ?, description = ?, file_path = ?, score = ?, upload_date = ?, id_intern = ? WHERE id_report = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, report.getId());
             preparedStatement.setString(2, report.getReportType());
-            preparedStatement.setString(2, report.getDescription());
+            preparedStatement.setString(3, report.getDescription());
             preparedStatement.setString(4, report.getFilePath());
-            preparedStatement.setInt(4, report.getScore());
+            preparedStatement.setInt(4, report.getGrade());
             preparedStatement.setDate(6, report.getUploadDate());
             preparedStatement.setString(7, report.getIdIntern());
             
@@ -90,7 +90,7 @@ public class ReportDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -110,7 +110,7 @@ public class ReportDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();

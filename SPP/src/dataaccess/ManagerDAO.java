@@ -29,12 +29,12 @@ public class ManagerDAO {
             preparedStatement.setString(4, manager.getLastname());
             preparedStatement.setString(5, manager.getPosition());
             preparedStatement.setString(6, manager.geteMail());
-            preparedStatement.setInt(8, manager.getIdOrganization());
+            preparedStatement.setInt(7, manager.getIdOrganization());
             
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -63,7 +63,7 @@ public class ManagerDAO {
                 resultSet.getInt("id_organization"));                
         } 
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -91,7 +91,7 @@ public class ManagerDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -111,7 +111,7 @@ public class ManagerDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();

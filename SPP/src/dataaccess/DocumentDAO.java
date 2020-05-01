@@ -32,7 +32,7 @@ public class DocumentDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -56,10 +56,10 @@ public class DocumentDAO {
                 resultSet.getString("file_path"),
                 resultSet.getDate("upload_date"),
                 resultSet.getString("id_intern"),
-                resultSet.getInt("document_type"));                
+                resultSet.getInt("id_type"));                
         } 
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -70,7 +70,7 @@ public class DocumentDAO {
     public int updateDocument(int idDocument, Document document){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "UPDATE document SET id_document = ?, file_path = ?, upload_date = ?, id_intern = ?, document_type = ? WHERE id_document = ?";
+        String query = "UPDATE document SET id_document = ?, file_path = ?, upload_date = ?, id_intern = ?, id_type = ? WHERE id_document = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -85,7 +85,7 @@ public class DocumentDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -105,7 +105,7 @@ public class DocumentDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();

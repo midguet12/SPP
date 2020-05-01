@@ -35,7 +35,7 @@ public class UserDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -66,7 +66,7 @@ public class UserDAO {
                 
         } 
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -95,7 +95,7 @@ public class UserDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -115,7 +115,7 @@ public class UserDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();

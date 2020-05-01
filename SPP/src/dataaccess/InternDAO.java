@@ -31,7 +31,7 @@ public class InternDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -41,7 +41,7 @@ public class InternDAO {
     public Intern getIntern(String idIntern){
         Intern intern = null;
         connection = dbc.getConnection();
-        String query = "Select * from intern where id_intern = '?';";
+        String query = "Select * from intern where id_intern = ?;";
 
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query); 
@@ -57,7 +57,7 @@ public class InternDAO {
                 resultSet.getInt("id_project"));                
         } 
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -82,7 +82,7 @@ public class InternDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch (SQLException ex){
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();
@@ -102,7 +102,7 @@ public class InternDAO {
             affectedRows = preparedStatement.executeUpdate();
         }
         catch(SQLException ex){ 
-            ExceptionLogger.notify(ex.getMessage());
+            ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
             dbc.closeConnection();

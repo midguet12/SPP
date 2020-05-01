@@ -37,8 +37,8 @@ public class Encrypter {
       try{ 
            hashed = (toHexString(getSHA(password)));  
         } 
-        catch (NoSuchAlgorithmException e) {   
-            ExceptionLogger.notify(e.getMessage());
+        catch (NoSuchAlgorithmException ex) {   
+            ExceptionLogger.notify(ex, "utilities.Encrypter");
         } 
         finally{
         }
