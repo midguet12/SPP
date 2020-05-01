@@ -14,7 +14,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class ExceptionLogger{
-    public static void writeException(String errorLine){
+    
+    public static void writeException(Exception ex, String errorFileName){
         FileWriter logFile = null;
         PrintWriter writeLog;
         LocalDateTime timeNow;
@@ -24,7 +25,7 @@ public class ExceptionLogger{
             writeLog = new PrintWriter(logFile);
             
             timeNow = LocalDateTime.now();
-            writeLog.println(timeNow + " - " + errorLine);
+            writeLog.println(timeNow + " - " + errorFileName + ": " + ex.toString());
         } 
         catch (IOException exeption) {
              System.out.println(exeption.getMessage());
@@ -40,7 +41,8 @@ public class ExceptionLogger{
             } 
         }
     }
-    public static void notify(String errorLine){
+
+    public static void notify(Exception ex, String errorFileName){
         FileWriter logFile = null;
         PrintWriter writeLog;
         LocalDateTime timeNow;
@@ -50,8 +52,8 @@ public class ExceptionLogger{
             writeLog = new PrintWriter(logFile);
             
             timeNow = LocalDateTime.now();
-            writeLog.println(timeNow + " - " + errorLine);
-            sendEMail("something went wrong at " + timeNow, errorLine);
+            writeLog.println(timeNow + " - " + errorFileName + ": " + ex.toString());
+            sendEMail("something went wrong at " + errorFileName, timeNow + "\n" +  ex.toString());
             //System.out.println(errorLine);
 
         } 
@@ -69,6 +71,7 @@ public class ExceptionLogger{
             } 
         }
     }
+    
     public static void sendEMail(String eMailTitle, String eMailBody){
         Properties smtpPropierties = new Properties();
         smtpPropierties.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -95,10 +98,10 @@ public class ExceptionLogger{
             transporter.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));          
             transporter.close();          
             
-        } catch (AddressException exeption) {
-            writeException(exeption.getMessage());
-        } catch (MessagingException exeption) {
-            writeException(exeption.getMessage());
+        } catch (AddressException ex) {
+            writeException(ex, "utilities.ExceptionLogger");
+        } catch (MessagingException ex) {
+            writeException(ex, "utilities.ExceptionLogger");
         }
     }
 }
