@@ -32,7 +32,7 @@ public class InsertDAOTest {
         
     @Test
     public void testInsertManager(){
-        Manager manager = new Manager(1, "Carlos", "Santana", "Valenzuela", "Director", "dotcsv@gmail.com", 1);
+        Manager manager = new Manager(2, "Carlos", "Santana", "Valenzuela", "Director", "dotcsv@gmail.com", 1);
         ManagerDAO managerDAO = new ManagerDAO();
         
         assertEquals("Testing insertManager() ", 1, managerDAO.insertManager(manager));   
@@ -40,7 +40,7 @@ public class InsertDAOTest {
         
     @Test
     public void testInsertOrganization(){
-        Organization organization = new Organization(1, "YouTube", "Multimedia", "contact@youtube.com", "0180006565", 32, "Xalapa", "Avila camacho");
+        Organization organization = new Organization(2, "YouTube", "Multimedia", "contact@youtube.com", "0180006565", 30, "Xalapa", "Avila camacho");
         OrganizationDAO organizationDAO = new OrganizationDAO();
         
         assertEquals("Testing insertOrganization() ", 1, organizationDAO.insertOrganization(organization));   
@@ -48,7 +48,7 @@ public class InsertDAOTest {
         
     @Test
     public void testInsertProject(){
-        Project project = new Project(1, "Redes neuronales para PyMEs", "Mejorar la logística de PyMES", "Elaborar Redes neuronales", "Programar", 10, "Mejorar la logística", "Programar", "Servidores, equipos", 0, 0);
+        Project project = new Project(1, "Redes neuronales para PyMEs", "Mejorar la logística de PyMES", "Elaborar Redes neuronales", "Programar", 10, "Mejorar la logística", "Programar", "Servidores, equipos", 2, 2);
         ProjectDAO projectDAO = new ProjectDAO();
         
         assertEquals("Testing insertProject() ", 1, projectDAO.insertProject(project));   
