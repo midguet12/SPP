@@ -22,6 +22,5 @@
 hs_err_pid*
 
 *.xml
-*.class
-*.class
-SPP/build/classes/dataaccess/ActivityDAO.class
+
+
