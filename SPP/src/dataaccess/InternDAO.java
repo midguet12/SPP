@@ -90,14 +90,14 @@ public class InternDAO {
         return affectedRows;
     }
 
-    public int deleteIntern(int idIntern){
+    public int deleteIntern(String idIntern){
         int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "DELETE FROM intern WHERE id_intern = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, idIntern);
+            preparedStatement.setString(1, idIntern);
             
             affectedRows = preparedStatement.executeUpdate();
         }
