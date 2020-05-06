@@ -19,17 +19,17 @@ public class ReportDAO {
     public int insertReport(Report report){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "insert into report values(?, ?, ?, ?, ?, ?, ?);"; //Consulta
+        String query = "insert into report(id_type, description, filepath, grade, upload_date, id_intern)"
+                     + " values(?, ?, ?, ?, ?, ?);"; //Consulta
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, report.getId());
-            preparedStatement.setString(2, report.getReportType());
-            preparedStatement.setString(3, report.getDescription());
-            preparedStatement.setString(4, report.getFilePath());
-            preparedStatement.setInt(5, report.getGrade());
-            preparedStatement.setDate(6, report.getUploadDate());
-            preparedStatement.setString(7, report.getIdIntern());
+            preparedStatement.setString(1, report.getReportType());
+            preparedStatement.setString(2, report.getDescription());
+            preparedStatement.setString(3, report.getFilePath());
+            preparedStatement.setInt(4, report.getGrade());
+            preparedStatement.setDate(5, report.getUploadDate());
+            preparedStatement.setString(6, report.getIdIntern());
 
             affectedRows = preparedStatement.executeUpdate();
         }
@@ -73,19 +73,19 @@ public class ReportDAO {
     public int updateReport(int idReport, Report report){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "UPDATE report SET id_report = ?,  id_type = ?, description = ?, filepath = ?, grade = ?, upload_date = ?, id_intern = ? WHERE id_report = ?";
+        String query = "UPDATE report SET id_type = ?, description = ?, filepath = ?, grade = ?,"
+                     + " upload_date = ?, id_intern = ? WHERE id_report = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, report.getId());
-            preparedStatement.setString(2, report.getReportType());
-            preparedStatement.setString(3, report.getDescription());
-            preparedStatement.setString(4, report.getFilePath());
-            preparedStatement.setInt(5, report.getGrade());
-            preparedStatement.setDate(6, report.getUploadDate());
-            preparedStatement.setString(7, report.getIdIntern());
+            preparedStatement.setString(1, report.getReportType());
+            preparedStatement.setString(2, report.getDescription());
+            preparedStatement.setString(3, report.getFilePath());
+            preparedStatement.setInt(4, report.getGrade());
+            preparedStatement.setDate(5, report.getUploadDate());
+            preparedStatement.setString(6, report.getIdIntern());
             
-            preparedStatement.setInt(8, idReport);
+            preparedStatement.setInt(7, idReport);
           
             affectedRows = preparedStatement.executeUpdate();
         }

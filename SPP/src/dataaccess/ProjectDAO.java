@@ -20,21 +20,22 @@ public class ProjectDAO {
     public int insertProject(Project project){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "insert into project values (?,?,?,?,?,?,?,?,?,?,?);";
+        String query = "insert into project(project_name, description, responsabilities, activities,"
+                     + " duration, general_objetibe, metodology, resources, id_manager, id_organization)"
+                     + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, project.getId());
-            preparedStatement.setString(2, project.getName());
-            preparedStatement.setString(3, project.getDescription());
-            preparedStatement.setString(4, project.getResponsabilities());
-            preparedStatement.setString(5, project.getActivities());
-            preparedStatement.setInt(6, project.getDuration());
-            preparedStatement.setString(7, project.getGeneralObjetive());
-            preparedStatement.setString(8, project.getMetodology());
-            preparedStatement.setString(9, project.getResources());
-            preparedStatement.setInt(10, project.getIdManager());
-            preparedStatement.setInt(11, project.getIdOrganization());
+            preparedStatement.setString(1, project.getName());
+            preparedStatement.setString(2, project.getDescription());
+            preparedStatement.setString(3, project.getResponsabilities());
+            preparedStatement.setString(4, project.getActivities());
+            preparedStatement.setInt(5, project.getDuration());
+            preparedStatement.setString(6, project.getGeneralObjetive());
+            preparedStatement.setString(7, project.getMetodology());
+            preparedStatement.setString(8, project.getResources());
+            preparedStatement.setInt(9, project.getIdManager());
+            preparedStatement.setInt(10, project.getIdOrganization());
             
             affectedRows = preparedStatement.executeUpdate();
             
@@ -84,25 +85,26 @@ public class ProjectDAO {
     public int updateProject(int id,Project project){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "update project set id_project = ?, project_name = ?, description = ?, responsabilities = ?, activities = ?, duration = ?, general_objective = ?, metodology = ?, resources = ?, id_manager = ?, id_organization = ? where id_project = ?";
+        String query = "update project set project_name = ?, description = ?, responsabilities = ?,"
+                     + " activities = ?, duration = ?, general_objective = ?, metodology = ?,"
+                     + " resources = ?, id_manager = ?, id_organization = ? where id_project = ?";
         
         
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
            
-            preparedStatement.setInt(1, project.getId());
-            preparedStatement.setString(2, project.getName());
-            preparedStatement.setString(3, project.getDescription());
-            preparedStatement.setString(4, project.getResponsabilities());
-            preparedStatement.setString(5, project.getActivities());
-            preparedStatement.setInt(6, project.getDuration());
-            preparedStatement.setString(7, project.getGeneralObjetive());
-            preparedStatement.setString(8, project.getMetodology());
-            preparedStatement.setString(9, project.getResources());
-            preparedStatement.setInt(10, project.getIdManager());
-            preparedStatement.setInt(11, project.getIdOrganization());
+            preparedStatement.setString(1, project.getName());
+            preparedStatement.setString(2, project.getDescription());
+            preparedStatement.setString(3, project.getResponsabilities());
+            preparedStatement.setString(4, project.getActivities());
+            preparedStatement.setInt(5, project.getDuration());
+            preparedStatement.setString(6, project.getGeneralObjetive());
+            preparedStatement.setString(7, project.getMetodology());
+            preparedStatement.setString(8, project.getResources());
+            preparedStatement.setInt(9, project.getIdManager());
+            preparedStatement.setInt(10, project.getIdOrganization());
             
-            preparedStatement.setInt(12, id);
+            preparedStatement.setInt(11, id);
             
             affectedRows = preparedStatement.executeUpdate();
         }

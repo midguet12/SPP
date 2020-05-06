@@ -19,18 +19,18 @@ public class OrganizationDAO {
     public int insertOrganization(Organization organization){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "insert into organization values(?, ?, ?, ?, ?, ?, ?, ?);"; 
+        String query = "insert into organization(name, sector, email, phone_number, id_state, city, address)"
+                     + " values(?, ?, ?, ?, ?, ?, ?);"; 
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, organization.getId());
-            preparedStatement.setString(2, organization.getName());
-            preparedStatement.setString(3, organization.getSector());
-            preparedStatement.setString(4, organization.geteMail());
-            preparedStatement.setString(5, organization.getPhoneNumber());
-            preparedStatement.setInt(6, organization.getIdState());
-            preparedStatement.setString(7, organization.getPhoneNumber());
-            preparedStatement.setString(8, organization.getAddress());
+            preparedStatement.setString(1, organization.getName());
+            preparedStatement.setString(2, organization.getSector());
+            preparedStatement.setString(3, organization.geteMail());
+            preparedStatement.setString(4, organization.getPhoneNumber());
+            preparedStatement.setInt(5, organization.getIdState());
+            preparedStatement.setString(6, organization.getPhoneNumber());
+            preparedStatement.setString(7, organization.getAddress());
             
             affectedRows = preparedStatement.executeUpdate();
         }
@@ -76,20 +76,20 @@ public class OrganizationDAO {
     public int updateOrganization(int idOrganization, Organization organization){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "UPDATE organization SET id_organization = ?, name = ?, sector = ?, email = ?, phone_number = ?, id_state = ?, city = ?, address = ? WHERE id_organization = ?";
+        String query = "UPDATE organization SET name = ?, sector = ?, email = ?, phone_number = ?,"
+                     + " id_state = ?, city = ?, address = ? WHERE id_organization = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, organization.getId());
-            preparedStatement.setString(2, organization.getName());
-            preparedStatement.setString(3, organization.getSector());
-            preparedStatement.setString(4, organization.geteMail());
-            preparedStatement.setString(5, organization.getPhoneNumber());
-            preparedStatement.setInt(6, organization.getIdState());
-            preparedStatement.setString(7, organization.getCity());
-            preparedStatement.setString(8, organization.getAddress());
+            preparedStatement.setString(1, organization.getName());
+            preparedStatement.setString(2, organization.getSector());
+            preparedStatement.setString(3, organization.geteMail());
+            preparedStatement.setString(4, organization.getPhoneNumber());
+            preparedStatement.setInt(5, organization.getIdState());
+            preparedStatement.setString(6, organization.getCity());
+            preparedStatement.setString(7, organization.getAddress());
             
-            preparedStatement.setInt(9, idOrganization);
+            preparedStatement.setInt(8, idOrganization);
           
             affectedRows = preparedStatement.executeUpdate();
         }
