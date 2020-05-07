@@ -11,7 +11,7 @@ public class SPP {
         try{
             System.out.println(Hola);
         } catch (Exception e){
-            ExceptionLogger.notify(e, "hola");
+            ExceptionLogger.notify(e,"SPP");
         }
         
         

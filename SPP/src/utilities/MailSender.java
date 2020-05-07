@@ -33,7 +33,7 @@ public class MailSender {
     }
     
     public static void sendEMail(String eMailTitle, String eMailBody){
-         Session eMailSession = prepareEMail();
+        Session eMailSession = prepareEMail();
         
         String title = eMailTitle;
         String message = eMailBody;

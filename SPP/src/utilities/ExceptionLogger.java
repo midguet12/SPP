@@ -38,6 +38,7 @@ public class ExceptionLogger{
         LocalDateTime timeNow = LocalDateTime.now();
         
         writeException(ex, errorFileName);
-        MailSender.sendEMail("something went wrong at " + errorFileName, timeNow + "\n" +  ex.toString());
+        MailSender.sendEMail("Something went wrong at " + errorFileName, "File: " + errorFileName + "\n" + timeNow + "\n" +  ex.toString());
+        System.out.println(ex.getMessage());
     }
 }
