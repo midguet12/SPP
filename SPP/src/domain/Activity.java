@@ -9,14 +9,27 @@ public class Activity {
     private String value;
     private String idIntern;
     private Date uploadDate;
-
-    public Activity(int id, String name, String value, String description,  Date uploadDate, String idIntern) {
-        this.id = id;
+    
+    public Activity(String name, String value, String description,  Date uploadDate, String idIntern) {
         this.name = name;
-        this.description = description;
         this.value = value;
-        this.idIntern = idIntern;
+        this.description = description;
         this.uploadDate = uploadDate;
+        this.idIntern = idIntern;
+
+    }
+
+     
+   
+    public Activity(int id,String name, String value, String description,  Date uploadDate, String idIntern) {
+        this.id = id;
+        
+        this.name = name;
+        this.value = value;
+        this.description = description;
+        this.uploadDate = uploadDate;
+        this.idIntern = idIntern;
+       
     }
 
     public int getId() {

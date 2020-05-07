@@ -9,12 +9,20 @@ public class Document {
     private String idIntern;
     private Date uploadDate;
 
+    public Document(String filePath, Date uploadDate, String idIntern, int documentType) {
+        this.filePath = filePath;
+        this.uploadDate = uploadDate;
+        this.idIntern = idIntern;
+        this.documentType = documentType;
+    }
+    
     public Document(int id, String filePath, Date uploadDate, String idIntern, int documentType) {
         this.id = id;
-        this.documentType = documentType;
         this.filePath = filePath;
-        this.idIntern = idIntern;
         this.uploadDate = uploadDate;
+        this.idIntern = idIntern;
+        this.documentType = documentType;
+
     }
 
     public int getIdDocument() {

@@ -11,6 +11,8 @@ public class DocumentDAO {
     private final DataBaseConnection dbc;
     private Connection connection;
     private ResultSet resultSet;
+    private String className = this.getClass().getName();
+
         
     public DocumentDAO(){
         dbc = new DataBaseConnection();
@@ -33,6 +35,10 @@ public class DocumentDAO {
         }
         catch (SQLException ex){
             ExceptionLogger.notify(ex, this.getClass().getName());
+        }
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
         }
         finally{
             dbc.closeConnection();

@@ -11,6 +11,7 @@ public class ActivityDAO {
     private final DataBaseConnection dbc;
     private Connection connection;
     private ResultSet resultSet;
+    private String className = this.getClass().getName();
         
     public ActivityDAO(){
         dbc = new DataBaseConnection();
@@ -19,7 +20,7 @@ public class ActivityDAO {
     public int insertActivity(Activity activity){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "insert into activity(name, value, description, uploaud_date, id_intern)"
+        String query = "insert into activity(name, value, description, upload_date, id_intern)"
                      + " values(?, ?, ?, ?, ?);";
         
         try{
@@ -31,16 +32,27 @@ public class ActivityDAO {
             preparedStatement.setString(5, activity.getIdIntern());
             
             affectedRows = preparedStatement.executeUpdate();
+            
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
         }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
+        }
+        
         finally{
             dbc.closeConnection();
         }
         
         return affectedRows;
     }
+    
     public Activity getActivity(int idActivity){
         Activity activity = null;
         connection = dbc.getConnection();
@@ -63,10 +75,8 @@ public class ActivityDAO {
         } 
         
         catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
-        }
-        catch (Exception ex){
-            ExceptionLogger.notify(ex, "hola");
+            //ExceptionLogger.notify(ex, className);
+            
         }
         finally{
             dbc.closeConnection();
