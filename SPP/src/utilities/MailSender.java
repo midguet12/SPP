@@ -1,5 +1,7 @@
 package utilities;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -14,6 +16,25 @@ public class MailSender {
     private static String sender;
     private static String password;
     private static String receiver;
+    
+    public static void writeConfFile(){
+        String file = "email.conf";
+        EmailConf email = new EmailConf("exceptionsSPP@gmail.com","03042020asd","seth261099@gmail.com");
+        
+        try {
+            FileOutputStream fileOut= new FileOutputStream(file);
+            ObjectOutputStream writer = new ObjectOutputStream(fileOut);
+            
+            writer.writeObject(email); 
+            fileOut.close();
+            writer.close();
+            
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+    }
     
     private static Session prepareEMail(){
         Properties smtpPropierties = new Properties();
