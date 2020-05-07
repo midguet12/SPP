@@ -19,17 +19,17 @@ public class ManagerDAO {
     public int insertManager(Manager manager){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "insert into manager values(?, ?, ?, ?, ?, ?, ?);"; //Consulta
+        String query = "insert into manager(name, middlename, lastname, position, email, id_organization)"
+                     + " values(?, ?, ?, ?, ?, ?);";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, manager.getId());
-            preparedStatement.setString(2, manager.getName());
-            preparedStatement.setString(3, manager.getMiddlename());
-            preparedStatement.setString(4, manager.getLastname());
-            preparedStatement.setString(5, manager.getPosition());
-            preparedStatement.setString(6, manager.geteMail());
-            preparedStatement.setInt(7, manager.getIdOrganization());
+            preparedStatement.setString(1, manager.getName());
+            preparedStatement.setString(2, manager.getMiddlename());
+            preparedStatement.setString(3, manager.getLastname());
+            preparedStatement.setString(4, manager.getPosition());
+            preparedStatement.setString(5, manager.geteMail());
+            preparedStatement.setInt(6, manager.getIdOrganization());
             
             affectedRows = preparedStatement.executeUpdate();
         }
@@ -74,19 +74,19 @@ public class ManagerDAO {
     public int updateManager(int idManager, Manager manager){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "UPDATE manager SET id_manager = ?, name = ?, middlename = ?, lastname  = ?, position = ?, email = ?, id_organization = ? WHERE id_manager = ?";
+        String query = "UPDATE manager SET name = ?, middlename = ?, lastname  = ?, position = ?,"
+                     + " email = ?, id_organization = ? WHERE id_manager = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, manager.getId());
-            preparedStatement.setString(2, manager.getName());
-            preparedStatement.setString(3, manager.getMiddlename());
-            preparedStatement.setString(4, manager.getLastname());
-            preparedStatement.setString(5, manager.getPosition());
-            preparedStatement.setString(6, manager.geteMail());
-            preparedStatement.setInt(7, manager.getIdOrganization());
+            preparedStatement.setString(1, manager.getName());
+            preparedStatement.setString(2, manager.getMiddlename());
+            preparedStatement.setString(3, manager.getLastname());
+            preparedStatement.setString(4, manager.getPosition());
+            preparedStatement.setString(5, manager.geteMail());
+            preparedStatement.setInt(6, manager.getIdOrganization());
             
-            preparedStatement.setInt(8, idManager);
+            preparedStatement.setInt(7, idManager);
           
             affectedRows = preparedStatement.executeUpdate();
         }

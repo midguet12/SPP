@@ -19,16 +19,16 @@ public class ActivityDAO {
     public int insertActivity(Activity activity){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "insert into activity values(?, ?, ?, ?, ?, ?);"; //Consulta
+        String query = "insert into activity(name, value, description, uploaud_date, id_intern)"
+                     + " values(?, ?, ?, ?, ?);";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, activity.getId());
-            preparedStatement.setString(2, activity.getName());
-            preparedStatement.setString(3, activity.getValue());
-            preparedStatement.setString(4, activity.getDescription());
-            preparedStatement.setDate(5, activity.getUploadDate());
-            preparedStatement.setString(6, activity.getIdIntern());
+            preparedStatement.setString(1, activity.getName());
+            preparedStatement.setString(2, activity.getValue());
+            preparedStatement.setString(3, activity.getDescription());
+            preparedStatement.setDate(4, activity.getUploadDate());
+            preparedStatement.setString(5, activity.getIdIntern());
             
             affectedRows = preparedStatement.executeUpdate();
         }
@@ -77,18 +77,18 @@ public class ActivityDAO {
     public int updateActivity(int idActivity, Activity activity){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "UPDATE activity SET id_activity = ?, name = ?, value = ?, description = ?, upload_date = ?, id_intern = ? WHERE id_activity = ?";
+        String query = "UPDATE activity SET name = ?, value = ?, description = ?, upload_date = ?,"
+                     + " id_intern = ? WHERE id_activity = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, activity.getId());
-            preparedStatement.setString(2, activity.getName());
-            preparedStatement.setString(3, activity.getValue());
-            preparedStatement.setString(4, activity.getDescription());
-            preparedStatement.setDate(5, activity.getUploadDate());
-            preparedStatement.setString(6, activity.getIdIntern());
+            preparedStatement.setString(1, activity.getName());
+            preparedStatement.setString(2, activity.getValue());
+            preparedStatement.setString(3, activity.getDescription());
+            preparedStatement.setDate(4, activity.getUploadDate());
+            preparedStatement.setString(5, activity.getIdIntern());
             
-            preparedStatement.setInt(7, idActivity);
+            preparedStatement.setInt(6, idActivity);
           
             affectedRows = preparedStatement.executeUpdate();
         }

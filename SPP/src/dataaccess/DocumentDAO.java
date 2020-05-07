@@ -19,15 +19,15 @@ public class DocumentDAO {
     public int insertDocument(Document document){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "insert into document values(?, ?, ?, ?, ?);"; //Consulta
+        String query = "insert into document(file_path, upload_date, id_intern, id_type)"
+                     + " values(?, ?, ?, ?);"; 
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, document.getIdDocument());
-            preparedStatement.setString(2, document.getFilePath());
-            preparedStatement.setDate(3, document.getUploadDate());
-            preparedStatement.setString(4, document.getIdIntern());
-            preparedStatement.setInt(5, document.getDocumentType());
+            preparedStatement.setString(1, document.getFilePath());
+            preparedStatement.setDate(2, document.getUploadDate());
+            preparedStatement.setString(3, document.getIdIntern());
+            preparedStatement.setInt(4, document.getDocumentType());
 
             affectedRows = preparedStatement.executeUpdate();
         }
@@ -70,17 +70,17 @@ public class DocumentDAO {
     public int updateDocument(int idDocument, Document document){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "UPDATE document SET id_document = ?, file_path = ?, upload_date = ?, id_intern = ?, id_type = ? WHERE id_document = ?";
+        String query = "UPDATE document SET file_path = ?, upload_date = ?, id_intern = ?,"
+                     + " id_type = ? WHERE id_document = ?";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, document.getIdDocument());
-            preparedStatement.setString(2, document.getFilePath());
-            preparedStatement.setDate(3, document.getUploadDate());
-            preparedStatement.setString(4, document.getIdIntern());
-            preparedStatement.setInt(5, document.getDocumentType());
+            preparedStatement.setString(1, document.getFilePath());
+            preparedStatement.setDate(2, document.getUploadDate());
+            preparedStatement.setString(3, document.getIdIntern());
+            preparedStatement.setInt(4, document.getDocumentType());
             
-            preparedStatement.setInt(6, idDocument);
+            preparedStatement.setInt(5, idDocument);
           
             affectedRows = preparedStatement.executeUpdate();
         }
