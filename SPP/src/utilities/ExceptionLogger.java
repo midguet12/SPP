@@ -13,7 +13,7 @@ public class ExceptionLogger{
         LocalDateTime timeNow;
 
         try{
-            logFile = new FileWriter("log.txt", true);
+            logFile = new FileWriter("error.log", true);
             writeLog = new PrintWriter(logFile);
             
             timeNow = LocalDateTime.now();

@@ -24,7 +24,8 @@ public class MailSender {
         
         sender = "exceptionsSPP@gmail.com";
         password = "03042020asd";
-        receiver = "seth261099@gmail.com";
+        //receiver = "seth261099@gmail.com";
+        receiver = "midguet12@hotmail.com";
         
         Session eMailSession = Session.getDefaultInstance(smtpPropierties);
         

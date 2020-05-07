@@ -61,8 +61,12 @@ public class ActivityDAO {
                 resultSet.getDate("upload_date"),
                 resultSet.getString("id_intern"));              
         } 
+        
         catch (SQLException ex){
             ExceptionLogger.notify(ex, this.getClass().getName());
+        }
+        catch (Exception ex){
+            ExceptionLogger.notify(ex, "hola");
         }
         finally{
             dbc.closeConnection();
