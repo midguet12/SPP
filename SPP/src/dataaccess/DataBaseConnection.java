@@ -15,7 +15,7 @@ public class DataBaseConnection {
     
     private DataBase db = readConfFile();
     
-    public static void writeConfFile(){
+    /*public static void writeConfFile(){
         String file = "db.conf";
         DataBase db = new DataBase("midguet.ddns.net","midguet","Magt2208");
         
@@ -33,7 +33,7 @@ public class DataBaseConnection {
             System.out.println(e.getMessage());
         }
         
-    }
+    }*/
     
     public static DataBase readConfFile(){
         String file = "db.conf";
