@@ -10,14 +10,15 @@ import utilities.MailSender;
 public class SPP {
     public static void main(String[] args) {
         
-        /*try{
+        try{
             System.out.println(Hola);
         } catch (Exception e){
             ExceptionLogger.notify(e,"SPP");
-        }*/
+        }
         
-        //System.out.println(DataBaseConnection.readConfFile().address);
-        MailSender.writeConfFile();
+        //MailSender.writeConfFile();
+        //System.out.println(MailSender.readConfFile().user);
+       
         
     }
 }

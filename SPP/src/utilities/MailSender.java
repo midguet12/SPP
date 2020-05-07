@@ -1,6 +1,8 @@
 package utilities;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Properties;
 import javax.mail.Message;
@@ -13,16 +15,18 @@ import javax.mail.internet.MimeMessage;
 import static utilities.ExceptionLogger.writeException;
 
 public class MailSender {
+    private static EmailConf email = readConfFile();
     private static String sender;
     private static String password;
     private static String receiver;
     
+    
     public static void writeConfFile(){
         String file = "email.conf";
-        EmailConf email = new EmailConf("exceptionsSPP@gmail.com","03042020asd","seth261099@gmail.com");
+        EmailConf email = new EmailConf("exceptionsSPP@gmail.com","03042020asd","midguet12@hotmail.com");
         
         try {
-            FileOutputStream fileOut= new FileOutputStream(file);
+            FileOutputStream fileOut = new FileOutputStream(file);
             ObjectOutputStream writer = new ObjectOutputStream(fileOut);
             
             writer.writeObject(email); 
@@ -36,6 +40,24 @@ public class MailSender {
         
     }
     
+    public static EmailConf readConfFile(){
+        String file = "email.conf";
+        EmailConf email = null;
+        try{
+            FileInputStream fileIn = new FileInputStream(file);
+            ObjectInputStream reader = new ObjectInputStream(fileIn);
+            
+            email = (EmailConf)reader.readObject();
+            
+            
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return email;
+        
+    }
+    
+    
     private static Session prepareEMail(){
         Properties smtpPropierties = new Properties();
         smtpPropierties.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -43,10 +65,10 @@ public class MailSender {
         smtpPropierties.setProperty("mail.smtp.port", "587");
         smtpPropierties.setProperty("mail.smtep.auth", "true");
         
-        sender = "exceptionsSPP@gmail.com";
-        password = "03042020asd";
+        sender = email.user;
+        password = email.password;
         //receiver = "seth261099@gmail.com";
-        receiver = "midguet12@hotmail.com";
+        receiver = email.receiver;
         
         Session eMailSession = Session.getDefaultInstance(smtpPropierties);
         
