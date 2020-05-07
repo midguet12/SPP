@@ -14,8 +14,8 @@ public class SPP {
         } catch (Exception e){
             ExceptionLogger.notify(e,"SPP");
         }*/
-        DataBaseConnection.writeConfFile();
         
+        System.out.println(DataBaseConnection.readConfFile().address);
         
     }
 }
