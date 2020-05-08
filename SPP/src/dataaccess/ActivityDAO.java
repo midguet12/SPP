@@ -74,9 +74,16 @@ public class ActivityDAO {
                 resultSet.getString("id_intern"));              
         } 
         
-        catch (SQLException ex){
-            //ExceptionLogger.notify(ex, className);
-            
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -102,8 +109,16 @@ public class ActivityDAO {
           
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -124,8 +139,16 @@ public class ActivityDAO {
             affectedRows = preparedStatement.executeUpdate();
             
         }
-        catch(SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();

@@ -12,6 +12,8 @@ public class ProjectDAO {
     private final DataBaseConnection dbc;
     private Connection connection;
     private ResultSet resultSet;
+    private String className = this.getClass().getName();
+
 
     public ProjectDAO() {
         dbc = new DataBaseConnection();
@@ -40,8 +42,17 @@ public class ProjectDAO {
             affectedRows = preparedStatement.executeUpdate();
             
             
-        } catch (SQLException ex) {
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        } 
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -73,8 +84,16 @@ public class ProjectDAO {
                 resultSet.getInt("id_manager"),
                 resultSet.getInt("id_organization"));   
         } 
-        catch (SQLException ex) {
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -82,7 +101,7 @@ public class ProjectDAO {
         return project;     
     }
     
-    public int updateProject(int id,Project project){
+    public int updateProject(Project project){
         int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "update project set project_name = ?, description = ?, responsabilities = ?,"
@@ -104,12 +123,20 @@ public class ProjectDAO {
             preparedStatement.setInt(9, project.getIdManager());
             preparedStatement.setInt(10, project.getIdOrganization());
             
-            preparedStatement.setInt(11, id);
+            preparedStatement.setInt(11, project.getId());
             
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex) {
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -128,8 +155,16 @@ public class ProjectDAO {
             
             affectedRows = preparedStatement.executeUpdate();
         } 
-        catch (SQLException ex) {
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();

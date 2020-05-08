@@ -11,6 +11,8 @@ public class OrganizationDAO {
     private final DataBaseConnection dbc;
     private Connection connection;
     private ResultSet resultSet;
+    private String className = this.getClass().getName();
+
         
     public OrganizationDAO(){
         dbc = new DataBaseConnection();
@@ -34,8 +36,16 @@ public class OrganizationDAO {
             
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -64,8 +74,16 @@ public class OrganizationDAO {
                 resultSet.getString("City"), 
                 resultSet.getString("Address"));                
         } 
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -73,7 +91,7 @@ public class OrganizationDAO {
         return organization;
     }
 
-    public int updateOrganization(int idOrganization, Organization organization){
+    public int updateOrganization(Organization organization){
         int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE organization SET name = ?, sector = ?, email = ?, phone_number = ?,"
@@ -89,12 +107,20 @@ public class OrganizationDAO {
             preparedStatement.setString(6, organization.getCity());
             preparedStatement.setString(7, organization.getAddress());
             
-            preparedStatement.setInt(8, idOrganization);
+            preparedStatement.setInt(8, organization.getId());
           
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -112,9 +138,18 @@ public class OrganizationDAO {
             preparedStatement.setInt(1, idOrganization);
             
             affectedRows = preparedStatement.executeUpdate();
+            
         }
-        catch(SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();

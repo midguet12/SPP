@@ -12,8 +12,7 @@ public class DocumentDAO {
     private Connection connection;
     private ResultSet resultSet;
     private String className = this.getClass().getName();
-
-        
+      
     public DocumentDAO(){
         dbc = new DataBaseConnection();
     }
@@ -33,12 +32,16 @@ public class DocumentDAO {
 
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
-        }
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
         catch (NullPointerException ex){
             ExceptionLogger.notify(ex, className);
             System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -73,7 +76,7 @@ public class DocumentDAO {
         return document;
     }
 
-    public int updateDocument(int idDocument, Document document){
+    public int updateDocument(Document document){
         int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE document SET file_path = ?, upload_date = ?, id_intern = ?,"
@@ -86,12 +89,20 @@ public class DocumentDAO {
             preparedStatement.setString(3, document.getIdIntern());
             preparedStatement.setInt(4, document.getDocumentType());
             
-            preparedStatement.setInt(5, idDocument);
+            preparedStatement.setInt(5, document.getIdDocument());
           
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -110,8 +121,16 @@ public class DocumentDAO {
             
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch(SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
