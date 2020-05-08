@@ -4,10 +4,18 @@ public class Intern{
     private String idIntern;
     private String period;
     private int grade;
-    private int idProject;
+    private int idProject = 1;
+    
+    public Intern(String idIntern, String period, int grade) {
+        this.idIntern = idIntern;
+        this.period = period;
+        this.grade = grade;
+        
+    }
+   
 
     public Intern(String idIntern, String period, int grade, int idProject) {
-        this.idIntern = idIntern;
+        this.idIntern = idIntern;   
         this.period = period;
         this.grade = grade;
         this.idProject = idProject;

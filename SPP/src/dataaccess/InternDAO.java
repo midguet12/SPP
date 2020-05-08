@@ -16,10 +16,12 @@ public class InternDAO {
         dbc = new DataBaseConnection();
     }
     
+    
     public int insertIntern(Intern intern){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "insert into intern values(?, ?, ?, ?);"; //Consulta
+        String query = "insert into intern(id_intern, period, grade, id_project) "
+                     + "values(?, ?, ?, ?);"; //Consulta
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);

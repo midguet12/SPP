@@ -33,7 +33,7 @@ create table intern(
 	id_intern VARCHAR(15) not null,
 	period VARCHAR(20),
 	grade INTEGER,
-	id_project INTEGER not null,
+	id_project INTEGER,
 	primary key (id_intern)
 );
 
@@ -132,6 +132,8 @@ ALTER TABLE user ADD CONSTRAINT FK_user_type1 FOREIGN KEY (id_type) REFERENCES u
 alter table project add CONSTRAINT  fk_project_manager FOREIGN key (id_manager) REFERENCES manager(id_manager);
 alter table project add CONSTRAINT fk_project_organization FOREIGN key (id_organization) REFERENCES organization(id_organization);
 alter table manager add CONSTRAINT fk_manager_organization FOREIGN key (id_organization) REFERENCES organization(id_organization);
+alter table intern add CONSTRAINT fk_intern_project FOREIGN key (id_project) REFERENCES project(id_project);
+alter table intern add CONSTRAINT fk_intern_user FOREIGN key (id_intern) REFERENCES user(id_user);
 
 INSERT INTO state(id_state, state) VALUES
 (1, 'Aguascalientes'),
@@ -180,6 +182,10 @@ insert into organization(name, email, phone_number, id_state, city, address) val
 
 insert into manager(name, middlename, email, id_organization) values
 	("Midguet","Garcia","midguet@garman.com",1);
+
+insert into project(project_name, description) values 
+	('Sin proyecto', 'Sin descripcion');
+
 
 insert into project(project_name, description, id_manager,id_organization) values
 	('Cloud','Servicio de nube',1,1),
