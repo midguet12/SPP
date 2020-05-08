@@ -32,9 +32,8 @@ public class User {
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
         this.type = type;
-        
-    }  
-
+    }
+    
     public String getIdUser() {
         return idUser;
     }

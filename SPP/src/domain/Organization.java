@@ -9,6 +9,17 @@ public class Organization {
     private int idState;
     private String city;
     private String address;
+    
+    public Organization(String name, String sector, String eMail, String phoneNumber, int idState, String city, String address) {
+        
+        this.name = name;
+        this.sector = sector;
+        this.eMail = eMail;
+        this.phoneNumber = phoneNumber;
+        this.idState = idState;
+        this.city = city;
+        this.address = address;
+    }
 
     public Organization(int id, String name, String sector, String eMail, String phoneNumber, int idState, String city, String address) {
         this.id = id;

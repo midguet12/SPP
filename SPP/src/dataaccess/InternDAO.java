@@ -11,6 +11,7 @@ public class InternDAO {
     private final DataBaseConnection dbc;
     private Connection connection;
     private ResultSet resultSet;
+    private String className = this.getClass().getName();
         
     public InternDAO(){
         dbc = new DataBaseConnection();
@@ -32,8 +33,16 @@ public class InternDAO {
             
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -58,8 +67,16 @@ public class InternDAO {
                 resultSet.getInt("grade"),
                 resultSet.getInt("id_project"));                
         } 
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -67,7 +84,7 @@ public class InternDAO {
         return intern;
     }
 
-    public int updateIntern(String idIntern, Intern intern){
+    public int updateIntern(Intern intern){
         int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE intern SET id_intern = ?, period = ?, grade = ?, id_project = ? WHERE id_intern = ?";
@@ -79,12 +96,20 @@ public class InternDAO {
             preparedStatement.setInt(3, intern.getGrade());
             preparedStatement.setInt(4, intern.getIdProject());
             
-            preparedStatement.setString(5, idIntern);
+            preparedStatement.setString(5, intern.getIdIntern());
           
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -103,8 +128,16 @@ public class InternDAO {
             
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch(SQLException ex){ 
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();

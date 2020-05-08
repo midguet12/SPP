@@ -11,6 +11,8 @@ public class UserDAO {
     private final DataBaseConnection dbc;
     private Connection connection;
     private ResultSet resultSet;
+    private String className = this.getClass().getName();
+
         
     public UserDAO(){
         dbc = new DataBaseConnection();
@@ -34,8 +36,16 @@ public class UserDAO {
             
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -65,8 +75,16 @@ public class UserDAO {
                 resultSet.getString("type"));
                 
         } 
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -74,7 +92,7 @@ public class UserDAO {
         return user;
     }
 
-    public int updateUser(String idUser, User user){
+    public int updateUser(User user){
         int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE user SET id_user = ?, name = ?, middlename = ?, lastname  = ?, password = ?, email = ?, phone_number = ?, id_type = ? WHERE id_user = ?";
@@ -90,12 +108,20 @@ public class UserDAO {
             preparedStatement.setString(7, user.getPhoneNumber());
             preparedStatement.setInt(8, user.getUserType());
             
-            preparedStatement.setString(9, idUser);
+            preparedStatement.setString(9, user.getIdUser());
           
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -114,8 +140,16 @@ public class UserDAO {
             
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch(SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();

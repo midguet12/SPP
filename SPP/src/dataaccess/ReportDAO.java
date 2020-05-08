@@ -11,6 +11,8 @@ public class ReportDAO {
     private final DataBaseConnection dbc;
     private Connection connection;
     private ResultSet resultSet;
+    private String className = this.getClass().getName();
+
         
     public ReportDAO(){
         dbc = new DataBaseConnection();
@@ -33,8 +35,16 @@ public class ReportDAO {
 
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -61,8 +71,16 @@ public class ReportDAO {
                 resultSet.getDate("upload_date"),
                 resultSet.getString("id_intern"));
         } 
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -70,7 +88,7 @@ public class ReportDAO {
         return report;
     }
 
-    public int updateReport(int idReport, Report report){
+    public int updateReport(Report report){
         int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE report SET id_type = ?, description = ?, filepath = ?, grade = ?,"
@@ -85,12 +103,20 @@ public class ReportDAO {
             preparedStatement.setDate(5, report.getUploadDate());
             preparedStatement.setString(6, report.getIdIntern());
             
-            preparedStatement.setInt(7, idReport);
+            preparedStatement.setInt(7, report.getId());
           
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -109,8 +135,16 @@ public class ReportDAO {
             
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch(SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();

@@ -19,8 +19,6 @@ public class Activity {
 
     }
 
-     
-   
     public Activity(int id,String name, String value, String description,  Date uploadDate, String idIntern) {
         this.id = id;
         

@@ -11,6 +11,8 @@ public class ManagerDAO {
     private final DataBaseConnection dbc;
     private Connection connection;
     private ResultSet resultSet;
+    private String className = this.getClass().getName();
+
         
     public ManagerDAO(){
         dbc = new DataBaseConnection();
@@ -33,8 +35,16 @@ public class ManagerDAO {
             
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -62,8 +72,16 @@ public class ManagerDAO {
                 resultSet.getString("email"),
                 resultSet.getInt("id_organization"));                
         } 
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -71,7 +89,7 @@ public class ManagerDAO {
         return manager;
     }
 
-    public int updateManager(int idManager, Manager manager){
+    public int updateManager(Manager manager){
         int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE manager SET name = ?, middlename = ?, lastname  = ?, position = ?,"
@@ -86,12 +104,20 @@ public class ManagerDAO {
             preparedStatement.setString(5, manager.geteMail());
             preparedStatement.setInt(6, manager.getIdOrganization());
             
-            preparedStatement.setInt(7, idManager);
+            preparedStatement.setInt(7, manager.getId());
           
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch (SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
@@ -110,8 +136,16 @@ public class ManagerDAO {
             
             affectedRows = preparedStatement.executeUpdate();
         }
-        catch(SQLException ex){
-            ExceptionLogger.notify(ex, this.getClass().getName());
+        catch (SQLException ex){    
+            ExceptionLogger.notify(ex, className);
+        } 
+        catch (NullPointerException ex){
+            ExceptionLogger.notify(ex, className);
+            System.out.println("Base de datos no disponible, contacte a administrador");
+        }
+        catch (Exception ex){
+            System.out.println("Algo salio mal, intente mas tarde");
+            ExceptionLogger.notify(ex, className);
         }
         finally{
             dbc.closeConnection();
