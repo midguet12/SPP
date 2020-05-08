@@ -1,48 +1,25 @@
 package dataaccess;
 
+import utilities.datastructure.DataBaseCredentials;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import utilities.ExceptionLogger;
 
 public class DataBaseConnection {
-
     private Connection connection = null;    
     
-    private DataBase db = readConfFile();
-    
-    /*public static void writeConfFile(){
+    private DataBaseCredentials db = readConfFile();
+    public static DataBaseCredentials readConfFile(){
         String file = "db.conf";
-        DataBase db = new DataBase("midguet.ddns.net","midguet","Magt2208");
-        
-        
-        try {
-            FileOutputStream fileOut= new FileOutputStream(file);
-            ObjectOutputStream writer = new ObjectOutputStream(fileOut);
-            
-            writer.writeObject(db); 
-            fileOut.close();
-            writer.close();
-            
-            
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        
-    }*/
-    
-    public static DataBase readConfFile(){
-        String file = "db.conf";
-        DataBase db = null;
+        DataBaseCredentials db = null;
         try{
             FileInputStream fileIn = new FileInputStream(file);
             ObjectInputStream reader = new ObjectInputStream(fileIn);
             
-            db = (DataBase)reader.readObject();
+            db = (DataBaseCredentials)reader.readObject();
             
             
         } catch(Exception e){
@@ -55,8 +32,9 @@ public class DataBaseConnection {
      
     public void startConnection(){ 
         try{
-            
-            connection = DriverManager.getConnection("jdbc:mysql://"+db.address+":3306/spp?useUnicode=yes&characterEncoding=UTF-8", db.user,db.password);
+            connection = DriverManager.getConnection("jdbc:mysql://" + db.getAddress()
+                        + ":3306/spp?useUnicode=yes&characterEncoding=UTF-8", 
+                        db.getUser(), db.getPassword());
 
         }
         catch(SQLException ex){

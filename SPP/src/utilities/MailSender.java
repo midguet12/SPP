@@ -1,5 +1,6 @@
 package utilities;
 
+import utilities.datastructure.EmailCredentials;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -15,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 import static utilities.ExceptionLogger.writeException;
 
 public class MailSender {
-    private static EmailConf email = readConfFile();
+    private static EmailCredentials email = readConfFile();
     private static String sender;
     private static String password;
     private static String receiver;
@@ -23,7 +24,7 @@ public class MailSender {
     
     public static void writeConfFile(){
         String file = "email.conf";
-        EmailConf email = new EmailConf("exceptionsSPP@gmail.com","03042020asd","midguet12@hotmail.com");
+        EmailCredentials email = new EmailCredentials("exceptionsSPP@gmail.com","03042020asd","midguet12@hotmail.com");
         
         try {
             FileOutputStream fileOut = new FileOutputStream(file);
@@ -40,14 +41,14 @@ public class MailSender {
         
     }
     
-    public static EmailConf readConfFile(){
+    public static EmailCredentials readConfFile(){
         String file = "email.conf";
-        EmailConf email = null;
+        EmailCredentials email = null;
         try{
             FileInputStream fileIn = new FileInputStream(file);
             ObjectInputStream reader = new ObjectInputStream(fileIn);
             
-            email = (EmailConf)reader.readObject();
+            email = (EmailCredentials)reader.readObject();
             
             
         } catch(Exception e){
@@ -65,10 +66,9 @@ public class MailSender {
         smtpPropierties.setProperty("mail.smtp.port", "587");
         smtpPropierties.setProperty("mail.smtep.auth", "true");
         
-        sender = email.user;
-        password = email.password;
-        //receiver = "seth261099@gmail.com";
-        receiver = email.receiver;
+        sender = email.getUser();
+        password = email.getPassword();
+        receiver = email.getReceiver();
         
         Session eMailSession = Session.getDefaultInstance(smtpPropierties);
         
