@@ -1,19 +1,10 @@
 package spp;
 
-import dataaccess.ActivityDAO;
-
-import dataaccess.DocumentDAO;
-import dataaccess.InternDAO;
-import domain.Activity;
-import domain.Document;
-import domain.Intern;
-import java.util.Calendar;
-
+import bussineslogic.StringChecker;
 
 public class SPP {
     public static void main(String[] args) {
-     
-        
-        
+        String string = "S1812147";
+        System.out.println(StringChecker.isIDIntern(string));
     }
 }
