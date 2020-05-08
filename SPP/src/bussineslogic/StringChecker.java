@@ -1,5 +1,5 @@
 //TODO
-//Revisar acentos
+//Revisar acentos y signos de puntuación
 package bussineslogic;
 
 import java.util.regex.Pattern;
@@ -29,6 +29,13 @@ public class StringChecker {
     public static boolean isIDIntern(String string){
         boolean evaluation; 
         String pattern = "S\\d{8}";        
+        evaluation = Pattern.matches(pattern, string);
+        
+        return evaluation;
+    }
+    public static boolean isAlphanumeric(String string){
+        boolean evaluation; 
+        String pattern = "[\\w|\\s]+";        
         evaluation = Pattern.matches(pattern, string);
         
         return evaluation;
