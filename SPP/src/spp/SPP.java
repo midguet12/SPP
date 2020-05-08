@@ -1,8 +1,10 @@
 package spp;
 
 import bussineslogic.StringChecker;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 //import org.apache.commons.net.ftp.FTP;
@@ -13,8 +15,11 @@ import sun.net.ftp.FtpClient;
 public class SPP {
     public static void main(String[] args) {
        
-        File file = new File("error.log");
-        //OutputStream out = new OutputStream();
+        File file = new File("hola.pdf");
+        
+        
+        
+        
         
         
         
@@ -44,11 +49,13 @@ public class SPP {
             }*/
             
             
+            OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
             
             
-            //ftp.retrieveFile("hola.pdf", local);
-            
-            System.out.println(ftp.storeFile("error.log", new FileInputStream(file)));
+            System.out.println(ftp.retrieveFile(file.getName(), out));
+            out.close();
+            //Cargar archivo
+            //System.out.println(ftp.storeFile("error.log", new FileInputStream(file)));
             
             
             
