@@ -84,7 +84,7 @@ public class ActivityDAO {
         return activity;
     }
 
-    public int updateActivity(int idActivity, Activity activity){
+    public int updateActivity(Activity activity){
         int affectedRows = 0;
         connection = dbc.getConnection();
         String query = "UPDATE activity SET name = ?, value = ?, description = ?, upload_date = ?,"
@@ -98,7 +98,7 @@ public class ActivityDAO {
             preparedStatement.setDate(4, activity.getUploadDate());
             preparedStatement.setString(5, activity.getIdIntern());
             
-            preparedStatement.setInt(6, idActivity);
+            preparedStatement.setInt(6, activity.getId());
           
             affectedRows = preparedStatement.executeUpdate();
         }
@@ -114,13 +114,15 @@ public class ActivityDAO {
     public int deleteActivity(int idActivity){
         int affectedRows = 0;
         connection = dbc.getConnection();
-        String query = "DELETE FROM activity WHERE id_activity = ?";
         
         try{
+            String query = "DELETE FROM activity WHERE id_activity = ?";
+
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, idActivity);
             
             affectedRows = preparedStatement.executeUpdate();
+            
         }
         catch(SQLException ex){
             ExceptionLogger.notify(ex, this.getClass().getName());
