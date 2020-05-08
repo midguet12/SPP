@@ -12,6 +12,21 @@ public class Project {
     private String resources;
     private int idManager;
     private int idOrganization;
+    
+    public Project(String name, String description, String responsabilities, String activities, int duration, String generalObjetive, String metodology, String resources, int idManager, int idOrganization) {
+        
+        this.name = name;
+        this.description = description;
+        this.responsabilities = responsabilities;
+        this.activities = activities;
+        this.duration = duration;
+        this.generalObjetive = generalObjetive;
+        this.metodology = metodology;
+        this.resources = resources;
+        this.idManager = idManager;
+        this.idOrganization = idOrganization;
+    }
+
 
     public Project(int id, String name, String description, String responsabilities, String activities, int duration, String generalObjetive, String metodology, String resources, int idManager, int idOrganization) {
         this.id = id;

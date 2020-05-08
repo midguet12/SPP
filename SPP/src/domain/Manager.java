@@ -8,6 +8,16 @@ public class Manager {
     private String position;
     private String eMail;
     private int idOrganization;
+    
+    public Manager(String name, String middlename, String lastname, String position, String eMail, int idOrganization) {
+        
+        this.name = name;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.position = position;
+        this.eMail = eMail;
+        this.idOrganization = idOrganization;
+    }
 
     public Manager(int id, String name, String middlename, String lastname, String position, String eMail, int idOrganization) {
         this.id = id;
@@ -18,6 +28,8 @@ public class Manager {
         this.eMail = eMail;
         this.idOrganization = idOrganization;
     }
+    
+    
 
     public int getId() {
         return id;

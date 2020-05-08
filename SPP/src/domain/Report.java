@@ -11,6 +11,16 @@ public class Report {
     private String idIntern;
     private Date uploadDate;
 
+    public Report(String reportType, String description, String filePath, int grade, Date uploadDate, String idIntern) {
+        
+        this.reportType = reportType;
+        this.description = description;
+        this.grade = grade;
+        this.filePath = filePath;
+        this.idIntern = idIntern;
+        this.uploadDate = uploadDate;
+    }
+    
     public Report(int id, String reportType, String description, String filePath, int grade, Date uploadDate, String idIntern) {
         this.id = id;
         this.reportType = reportType;
