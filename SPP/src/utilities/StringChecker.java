@@ -1,6 +1,6 @@
-//TODO
+//TO DO
 //Revisar acentos y signos de puntuación
-package bussineslogic;
+package utilities;
 
 import java.util.regex.Pattern;
 
