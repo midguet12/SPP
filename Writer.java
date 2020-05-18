@@ -34,7 +34,7 @@ public class Writer {
 public static void main(String[] args) 
     { 
         String filename = "db.conf"; 
-        DataBase data = new DataBase("midguet.ddns.net", "midguet","Magt2208"); 
+        DataBase data = new DataBase("192.168.1.120", "midguet","Magt2208"); 
 
         try { 
 
