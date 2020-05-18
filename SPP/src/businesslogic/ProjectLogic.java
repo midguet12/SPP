@@ -4,11 +4,11 @@ import dataaccess.ProjectDAO;
 import domain.Project;
 import utilities.DataValidator;
 
-public class ProjectLB {
+public class ProjectLogic {
     private final ProjectDAO dao;
     private Project project;
         
-    public ProjectLB() {
+    public ProjectLogic() {
         project = null;
         dao = new ProjectDAO();
     }

@@ -4,11 +4,11 @@ import dataaccess.InternDAO;
 import domain.Intern;
 import utilities.DataValidator;
 
-public class InternLB {
+public class InternLogic {
     private final InternDAO dao;
     private Intern intern;
         
-    public InternLB() {
+    public InternLogic() {
         intern = null;
         dao = new InternDAO();
     }

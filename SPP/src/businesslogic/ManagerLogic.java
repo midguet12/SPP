@@ -4,11 +4,11 @@ import dataaccess.ManagerDAO;
 import domain.Manager;
 import utilities.DataValidator;
 
-public class ManagerLB {
+public class ManagerLogic {
     private final ManagerDAO dao;
     private Manager manager;
         
-    public ManagerLB() {
+    public ManagerLogic() {
         manager = null;
         dao = new ManagerDAO();
     }

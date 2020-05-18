@@ -8,19 +8,18 @@ import java.sql.SQLException;
 import utilities.ExceptionLogger;
 
 public class ReportDAO {
-    private final DataBaseConnection dbc;
+    private final String className = this.getClass().getName();
+    private final DataBaseConnection databaseConnection;
     private Connection connection;
     private ResultSet resultSet;
-    private String className = this.getClass().getName();
-
         
     public ReportDAO(){
-        dbc = new DataBaseConnection();
+        databaseConnection = new DataBaseConnection();
     }
     
     public int insertReport(Report report){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "insert into report(id_type, description, filepath, grade, upload_date, id_intern)"
                      + " values(?, ?, ?, ?, ?, ?);"; //Consulta
         
@@ -47,13 +46,13 @@ public class ReportDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
     public Report getReport(int idReport){
         Report report = null;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "Select * from report where id_report = ?;";
 
         try{
@@ -83,14 +82,14 @@ public class ReportDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return report;
     }
 
     public int updateReport(Report report){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "UPDATE report SET id_type = ?, description = ?, filepath = ?, grade = ?,"
                      + " upload_date = ?, id_intern = ? WHERE id_report = ?";
         
@@ -119,14 +118,14 @@ public class ReportDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
 
     public int deleteReport(int idReport){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "DELETE FROM report WHERE id_report = ?";
         
         try{
@@ -147,7 +146,7 @@ public class ReportDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }   

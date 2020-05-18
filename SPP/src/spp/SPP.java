@@ -1,20 +1,12 @@
 package spp;
 
-
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-
-import java.io.OutputStream;
-
-import org.apache.commons.net.ftp.FTPClient;
-
+import dataaccess.UserDAO;
+import domain.User;
 
 public class SPP {
     public static void main(String[] args) {
-       
-  
-
+        UserDAO userDAO = new UserDAO();
+        User user = userDAO.getUser("18012193");
+        System.out.println(user);
     }
 }

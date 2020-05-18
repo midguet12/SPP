@@ -4,11 +4,11 @@ import dataaccess.ReportDAO;
 import domain.Report;
 import utilities.DataValidator;
 
-public class ReportLB {
+public class ReportLogic {
     private final ReportDAO dao;
     private Report report;
         
-    public ReportLB() {
+    public ReportLogic() {
         report = null;
         dao = new ReportDAO();
     }

@@ -4,11 +4,11 @@ import dataaccess.OrganizationDAO;
 import domain.Organization;
 import utilities.DataValidator;
 
-public class OrganizationLB {
+public class OrganizationLogic {
     private final OrganizationDAO dao;
     private Organization organization;
         
-    public OrganizationLB() {
+    public OrganizationLogic() {
         organization = null;
         dao = new OrganizationDAO();
     }

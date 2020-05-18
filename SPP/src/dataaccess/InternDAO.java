@@ -8,19 +8,19 @@ import java.sql.SQLException;
 import utilities.ExceptionLogger;
 
 public class InternDAO {
-    private final DataBaseConnection dbc;
+    private final String className = this.getClass().getName();
+    private final DataBaseConnection databaseConnection;
     private Connection connection;
     private ResultSet resultSet;
-    private String className = this.getClass().getName();
         
     public InternDAO(){
-        dbc = new DataBaseConnection();
+        databaseConnection = new DataBaseConnection();
     }
     
     
     public int insertIntern(Intern intern){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "insert into intern(id_intern, period, grade, id_project) "
                      + "values(?, ?, ?, ?);"; //Consulta
         
@@ -45,13 +45,13 @@ public class InternDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
     public Intern getIntern(String idIntern){
         Intern intern = null;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "Select * from intern where id_intern = ?;";
 
         try{
@@ -79,14 +79,14 @@ public class InternDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return intern;
     }
 
     public int updateIntern(Intern intern){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "UPDATE intern SET id_intern = ?, period = ?, grade = ?, id_project = ? WHERE id_intern = ?";
         
         try{
@@ -112,14 +112,14 @@ public class InternDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
 
     public int deleteIntern(String idIntern){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "DELETE FROM intern WHERE id_intern = ?";
         
         try{
@@ -140,7 +140,7 @@ public class InternDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }   

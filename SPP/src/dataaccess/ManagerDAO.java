@@ -8,19 +8,18 @@ import java.sql.SQLException;
 import utilities.ExceptionLogger;
 
 public class ManagerDAO {
-    private final DataBaseConnection dbc;
+    private final String className = this.getClass().getName();
+    private final DataBaseConnection databaseConnection;
     private Connection connection;
     private ResultSet resultSet;
-    private String className = this.getClass().getName();
-
         
     public ManagerDAO(){
-        dbc = new DataBaseConnection();
+        databaseConnection = new DataBaseConnection();
     }
     
     public int insertManager(Manager manager){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "insert into manager(name, middlename, lastname, position, email, id_organization)"
                      + " values(?, ?, ?, ?, ?, ?);";
         
@@ -47,13 +46,13 @@ public class ManagerDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
     public Manager getManager(int idManager){
         Manager manager = null;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "Select * from manager where id_manager = ?;";
 
         try{
@@ -84,14 +83,14 @@ public class ManagerDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return manager;
     }
 
     public int updateManager(Manager manager){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "UPDATE manager SET name = ?, middlename = ?, lastname  = ?, position = ?,"
                      + " email = ?, id_organization = ? WHERE id_manager = ?";
         
@@ -120,14 +119,14 @@ public class ManagerDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
 
     public int deleteManager(int idManager){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "DELETE FROM manager WHERE id_manager = ?";
         
         try{
@@ -148,7 +147,7 @@ public class ManagerDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }   

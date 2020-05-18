@@ -4,11 +4,11 @@ import dataaccess.DocumentDAO;
 import domain.Document;
 import utilities.DataValidator;
 
-public class DocumentLB {
+public class DocumentLogic {
     private final DocumentDAO dao;
     private Document document;
         
-    public DocumentLB() {
+    public DocumentLogic() {
         document = null;
         dao = new DocumentDAO();
     }

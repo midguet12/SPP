@@ -4,11 +4,11 @@ import dataaccess.UserDAO;
 import domain.User;
 import utilities.DataValidator;
 
-public class UserLB {
+public class UserLogic {
     private final UserDAO dao;
     private User user;
         
-    public UserLB() {
+    public UserLogic() {
         user = null;
         dao = new UserDAO();
     }

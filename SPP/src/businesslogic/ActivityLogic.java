@@ -4,11 +4,11 @@ import dataaccess.ActivityDAO;
 import domain.Activity;
 import utilities.DataValidator;
 
-public class ActivityLB {
+public class ActivityLogic {
     private final ActivityDAO dao;
     private Activity activity;
         
-    public ActivityLB() {
+    public ActivityLogic() {
         activity = null;
         dao = new ActivityDAO();
     }

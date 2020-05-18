@@ -8,18 +8,18 @@ import java.sql.SQLException;
 import utilities.ExceptionLogger;
 
 public class ActivityDAO {
-    private final DataBaseConnection dbc;
+    private final String className = this.getClass().getName();
+    private final DataBaseConnection databaseConnection;
     private Connection connection;
     private ResultSet resultSet;
-    private String className = this.getClass().getName();
         
     public ActivityDAO(){
-        dbc = new DataBaseConnection();
+        databaseConnection = new DataBaseConnection();
     }
     
     public int insertActivity(Activity activity){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "insert into activity(name, value, description, upload_date, id_intern)"
                      + " values(?, ?, ?, ?, ?);";
         
@@ -47,7 +47,7 @@ public class ActivityDAO {
         }
         
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         
         return affectedRows;
@@ -55,7 +55,7 @@ public class ActivityDAO {
     
     public Activity getActivity(int idActivity){
         Activity activity = null;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "Select * from activity where id_activity = ?;";
 
         try{
@@ -86,14 +86,14 @@ public class ActivityDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return activity;
     }
 
     public int updateActivity(Activity activity){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "UPDATE activity SET name = ?, value = ?, description = ?, upload_date = ?,"
                      + " id_intern = ? WHERE id_activity = ?";
         
@@ -121,14 +121,14 @@ public class ActivityDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
 
     public int deleteActivity(int idActivity){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         
         try{
             String query = "DELETE FROM activity WHERE id_activity = ?";
@@ -151,7 +151,7 @@ public class ActivityDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }   
