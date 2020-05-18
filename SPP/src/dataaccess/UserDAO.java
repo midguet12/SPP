@@ -8,19 +8,18 @@ import java.sql.SQLException;
 import utilities.ExceptionLogger;
 
 public class UserDAO {
-    private final DataBaseConnection dbc;
+    private final String className = this.getClass().getName();
+    private final DataBaseConnection databaseConnection;
     private Connection connection;
     private ResultSet resultSet;
-    private String className = this.getClass().getName();
-
         
     public UserDAO(){
-        dbc = new DataBaseConnection();
+        databaseConnection = new DataBaseConnection();
     }
     
     public int insertUser(User user){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "insert into user values(?, ?, ?, ?, ?, ?, ?, ?);"; //Consulta
         
         try{
@@ -48,13 +47,13 @@ public class UserDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
     public User getUser(String idUser){
         User user = null;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         //String query = "Select * from user where id_user = " +idUser+ ";";        
         String query = "Select * from user LEFT JOIN user_type ON user.id_type = user_type.id_type where id_user = ?;";
 
@@ -87,14 +86,14 @@ public class UserDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return user;
     }
 
     public int updateUser(User user){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "UPDATE user SET id_user = ?, name = ?, middlename = ?, lastname  = ?, password = ?, email = ?, phone_number = ?, id_type = ? WHERE id_user = ?";
         
         try{
@@ -124,14 +123,14 @@ public class UserDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
 
     public int deleteUser(String idUser){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "DELETE FROM user WHERE id_user = ?";
         
         try{
@@ -152,7 +151,7 @@ public class UserDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }   

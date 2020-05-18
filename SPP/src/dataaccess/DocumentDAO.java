@@ -8,18 +8,18 @@ import java.sql.SQLException;
 import utilities.ExceptionLogger;
 
 public class DocumentDAO {
-    private final DataBaseConnection dbc;
+    private final String className = this.getClass().getName();
+    private final DataBaseConnection databaseConnection;
     private Connection connection;
     private ResultSet resultSet;
-    private String className = this.getClass().getName();
       
     public DocumentDAO(){
-        dbc = new DataBaseConnection();
+        databaseConnection = new DataBaseConnection();
     }
     
     public int insertDocument(Document document){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "insert into document(file_path, upload_date, id_intern, id_type)"
                      + " values(?, ?, ?, ?);"; 
         
@@ -44,13 +44,13 @@ public class DocumentDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
     public Document getDocument(int idDocument){
         Document document = null;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "Select * from document where id_document = ?;";
 
         try{
@@ -71,14 +71,14 @@ public class DocumentDAO {
             ExceptionLogger.notify(ex, this.getClass().getName());
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return document;
     }
 
     public int updateDocument(Document document){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "UPDATE document SET file_path = ?, upload_date = ?, id_intern = ?,"
                      + " id_type = ? WHERE id_document = ?";
         
@@ -105,14 +105,14 @@ public class DocumentDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
             
     public int deleteDocument(int idDocument){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "DELETE FROM document WHERE id_document = ?";
         
         try{
@@ -133,7 +133,7 @@ public class DocumentDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }   

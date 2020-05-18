@@ -8,19 +8,18 @@ import java.sql.SQLException;
 import utilities.ExceptionLogger;
 
 public class OrganizationDAO {
-    private final DataBaseConnection dbc;
+    private final String className = this.getClass().getName();
+    private final DataBaseConnection databaseConnection;
     private Connection connection;
     private ResultSet resultSet;
-    private String className = this.getClass().getName();
 
-        
     public OrganizationDAO(){
-        dbc = new DataBaseConnection();
+        databaseConnection = new DataBaseConnection();
     }
     
     public int insertOrganization(Organization organization){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "insert into organization(name, sector, email, phone_number, id_state, city, address)"
                      + " values(?, ?, ?, ?, ?, ?, ?);"; 
         
@@ -31,7 +30,7 @@ public class OrganizationDAO {
             preparedStatement.setString(3, organization.geteMail());
             preparedStatement.setString(4, organization.getPhoneNumber());
             preparedStatement.setInt(5, organization.getIdState());
-            preparedStatement.setString(6, organization.getPhoneNumber());
+            preparedStatement.setString(6, organization.getCity());
             preparedStatement.setString(7, organization.getAddress());
             
             affectedRows = preparedStatement.executeUpdate();
@@ -48,13 +47,13 @@ public class OrganizationDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
     public Organization getOrganization(int idOrganization){
         Organization organization = null;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "Select * from organization where id_organization = ?;";
 
         try{
@@ -86,14 +85,14 @@ public class OrganizationDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return organization;
     }
 
     public int updateOrganization(Organization organization){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "UPDATE organization SET name = ?, sector = ?, email = ?, phone_number = ?,"
                      + " id_state = ?, city = ?, address = ? WHERE id_organization = ?";
         
@@ -123,14 +122,14 @@ public class OrganizationDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
 
     public int deleteOrganization(int idOrganization){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "DELETE FROM organization WHERE id_organization = ?";
         
         try{
@@ -152,7 +151,7 @@ public class OrganizationDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }   

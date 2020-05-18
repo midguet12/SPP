@@ -9,21 +9,20 @@ import utilities.ExceptionLogger;
 
 
 public class ProjectDAO {
-    private final DataBaseConnection dbc;
+    private final String className = this.getClass().getName();
+    private final DataBaseConnection databaseConnection;
     private Connection connection;
     private ResultSet resultSet;
-    private String className = this.getClass().getName();
-
 
     public ProjectDAO() {
-        dbc = new DataBaseConnection();
+        databaseConnection = new DataBaseConnection();
     }   
     
     public int insertProject(Project project){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "insert into project(project_name, description, responsabilities, activities,"
-                     + " duration, general_objetive, metodology, resources, id_manager, id_organization)"
+                     + " duration, general_objective, metodology, resources, id_manager, id_organization)"
                      + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         
         try {
@@ -55,13 +54,13 @@ public class ProjectDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
     
     public Project getProject(int id){
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         Project project = null;
             
         try {
@@ -96,14 +95,14 @@ public class ProjectDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return project;     
     }
     
     public int updateProject(Project project){
         int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "update project set project_name = ?, description = ?, responsabilities = ?,"
                      + " activities = ?, duration = ?, general_objective = ?, metodology = ?,"
                      + " resources = ?, id_manager = ?, id_organization = ? where id_project = ?";
@@ -139,14 +138,14 @@ public class ProjectDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }     
         return affectedRows;
     }
     
     public int deleteProject(int id_project){
          int affectedRows = 0;
-        connection = dbc.getConnection();
+        connection = databaseConnection.getConnection();
         String query = "Delete from project where id_project = ?";
         
         try {
@@ -167,7 +166,7 @@ public class ProjectDAO {
             ExceptionLogger.notify(ex, className);
         }
         finally{
-            dbc.closeConnection();
+            databaseConnection.closeConnection();
         }
         return affectedRows;
     }
