@@ -45,6 +45,14 @@ public class InternLogic {
         return dao.deleteIntern(intern.getIdIntern());
     }
     
+    public void addGrade(int grade){
+        this.intern.setGrade(grade);
+    }
+    
+    public void addProject(int project){
+        this.intern.setIdProject(project);
+    }
+    
     public boolean validate(){
         if(DataValidator.isValid(this.intern)){
             this.isValid = true;

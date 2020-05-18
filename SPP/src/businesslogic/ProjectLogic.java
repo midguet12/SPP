@@ -45,6 +45,13 @@ public class ProjectLogic {
         return dao.deleteProject(project.getId());
     }
     
+    public void addManager(int manager){
+        this.project.setIdOrganization(manager);
+    }
+    public void addOrganization(int organization){
+        this.project.setIdOrganization(organization);
+    }
+    
     public boolean validate(){
         if(DataValidator.isValid(this.project)){
             this.isValid = true;

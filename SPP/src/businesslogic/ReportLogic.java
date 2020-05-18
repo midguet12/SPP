@@ -44,6 +44,10 @@ public class ReportLogic {
     public int deleteReport(){
         return dao.deleteReport(report.getId());
     }
+        
+    public void addIntern(String idIntern){
+        this.report.setIdIntern(idIntern);
+    }
     
     public boolean validate(){
         if(DataValidator.isValid(this.report)){

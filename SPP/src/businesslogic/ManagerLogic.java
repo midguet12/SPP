@@ -45,6 +45,10 @@ public class ManagerLogic {
         return dao.deleteManager(manager.getId());
     }
     
+    public void addOrganization(int organization){
+        this.manager.setIdOrganization(organization);
+    }
+    
     public boolean validate(){
         if(DataValidator.isValid(this.manager)){
             this.isValid = true;

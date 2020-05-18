@@ -45,6 +45,10 @@ public class ActivityLogic {
         return dao.deleteActivity(activity.getId());
     }
     
+    public void addIntern(String idIntern){
+        this.activity.setIdIntern(idIntern);
+    }
+    
     public boolean validate(){
         if(DataValidator.isValid(this.activity)){
             this.isValid = true;
