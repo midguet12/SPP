@@ -7,38 +7,34 @@ import utilities.DataValidator;
 public class UserLogic {
     private final UserDAO dao;
     private User user;
+    private boolean isValid;
         
     public UserLogic() {
         user = null;
         dao = new UserDAO();
+        isValid = false;
     }
 
-    public int setUser(User user) {
-        int aux = 0;
-        if(DataValidator.isValid(user)){
-            this.user = user;
-            aux = 1;
-        }
-        return aux;
+    public void setUser(User user) {
+        this.user = user;
     }
     
     public User getUser() {
         return user;
     }
-    
-    public int saveNewUser(){
-        return dao.insertUser(user);
+
+    public void writeNewUser(){
+        dao.insertUser(user);
     }
    
     public int readUser(String idUser){
-        int aux = 0;
-        User userAux;
-        userAux = dao.getUser(idUser);
-        if(userAux != null){
-           this.user = userAux;
-           aux = 1;
+        int notNullUser = 1;
+        this.user = dao.getUser(idUser);
+        if(this.user == null){
+            notNullUser = 0;
         }
-        return aux;
+
+        return notNullUser;
     }
     
     public int updateUser(){
@@ -47,5 +43,15 @@ public class UserLogic {
     
     public int deleteUser(){
         return dao.deleteUser(user.getIdUser());
+    }
+    
+    public boolean validate(){
+        if(DataValidator.isValid(this.user)){
+            this.isValid = true;
+        }
+        return this.isValid;
+    }
+    public boolean isValid(){
+        return this.isValid;
     }
 }

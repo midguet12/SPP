@@ -7,38 +7,34 @@ import utilities.DataValidator;
 public class OrganizationLogic {
     private final OrganizationDAO dao;
     private Organization organization;
+    private boolean isValid;
         
     public OrganizationLogic() {
         organization = null;
         dao = new OrganizationDAO();
+        isValid = false;
     }
 
-    public int setOrganization(Organization organization) {
-        int aux = 0;
-        if(DataValidator.isValid(organization)){
-            this.organization = organization;
-            aux = 1;
-        }
-        return aux;
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
     
     public Organization getOrganization() {
         return organization;
     }
-    
-    public int saveNewOrganization(){
-        return dao.insertOrganization(organization);
+
+    public void writeNewOrganization(){
+        dao.insertOrganization(organization);
     }
    
     public int readOrganization(int idOrganization){
-        int aux = 0;
-        Organization organizationAux;
-        organizationAux = dao.getOrganization(idOrganization);
-        if(organizationAux != null){
-           this.organization = organizationAux;
-           aux = 1;
+        int notNullOrganization = 1;
+        this.organization = dao.getOrganization(idOrganization);
+        if(this.organization == null){
+            notNullOrganization = 0;
         }
-        return aux;
+
+        return notNullOrganization;
     }
     
     public int updateOrganization(){
@@ -47,5 +43,15 @@ public class OrganizationLogic {
     
     public int deleteOrganization(){
         return dao.deleteOrganization(organization.getId());
+    }
+    
+    public boolean validate(){
+        if(DataValidator.isValid(this.organization)){
+            this.isValid = true;
+        }
+        return this.isValid;
+    }
+    public boolean isValid(){
+        return this.isValid;
     }
 }

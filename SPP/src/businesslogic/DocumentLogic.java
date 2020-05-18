@@ -7,38 +7,34 @@ import utilities.DataValidator;
 public class DocumentLogic {
     private final DocumentDAO dao;
     private Document document;
+    private boolean isValid;
         
     public DocumentLogic() {
         document = null;
         dao = new DocumentDAO();
+        isValid = false;
     }
 
-    public int setDocument(Document document) {
-        int aux = 0;
-        if(DataValidator.isValid(document)){
-            this.document = document;
-            aux = 1;
-        }
-        return aux;
+    public void setDocument(Document document) {
+        this.document = document;
     }
     
     public Document getDocument() {
         return document;
     }
-    
-    public int saveNewDocument(){
-        return dao.insertDocument(document);
+
+    public void writeNewDocument(){
+        dao.insertDocument(document);
     }
    
     public int readDocument(int idDocument){
-        int aux = 0;
-        Document documentAux;
-        documentAux = dao.getDocument(idDocument);
-        if(documentAux != null){
-           this.document = documentAux;
-           aux = 1;
+        int notNullDocument = 1;
+        this.document = dao.getDocument(idDocument);
+        if(this.document == null){
+            notNullDocument = 0;
         }
-        return aux;
+
+        return notNullDocument;
     }
     
     public int updateDocument(){
@@ -47,5 +43,15 @@ public class DocumentLogic {
     
     public int deleteDocument(){
         return dao.deleteDocument(document.getIdDocument());
+    }
+    
+    public boolean validate(){
+        if(DataValidator.isValid(this.document)){
+            this.isValid = true;
+        }
+        return this.isValid;
+    }
+    public boolean isValid(){
+        return this.isValid;
     }
 }

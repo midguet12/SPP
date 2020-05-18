@@ -7,38 +7,34 @@ import utilities.DataValidator;
 public class ManagerLogic {
     private final ManagerDAO dao;
     private Manager manager;
+    private boolean isValid;
         
     public ManagerLogic() {
         manager = null;
         dao = new ManagerDAO();
+        isValid = false;
     }
 
-    public int setManager(Manager manager) {
-        int aux = 0;
-        if(DataValidator.isValid(manager)){
-            this.manager = manager;
-            aux = 1;
-        }
-        return aux;
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
     
     public Manager getManager() {
         return manager;
     }
-    
-    public int saveNewManager(){
-        return dao.insertManager(manager);
+
+    public void writeNewManager(){
+        dao.insertManager(manager);
     }
    
     public int readManager(int idManager){
-        int aux = 0;
-        Manager managerAux;
-        managerAux = dao.getManager(idManager);
-        if(managerAux != null){
-           this.manager = managerAux;
-           aux = 1;
+        int notNullManager = 1;
+        this.manager = dao.getManager(idManager);
+        if(this.manager == null){
+            notNullManager = 0;
         }
-        return aux;
+
+        return notNullManager;
     }
     
     public int updateManager(){
@@ -47,5 +43,19 @@ public class ManagerLogic {
     
     public int deleteManager(){
         return dao.deleteManager(manager.getId());
+    }
+    
+    public void addOrganization(int organization){
+        this.manager.setIdOrganization(organization);
+    }
+    
+    public boolean validate(){
+        if(DataValidator.isValid(this.manager)){
+            this.isValid = true;
+        }
+        return this.isValid;
+    }
+    public boolean isValid(){
+        return this.isValid;
     }
 }

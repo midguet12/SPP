@@ -7,38 +7,34 @@ import utilities.DataValidator;
 public class ProjectLogic {
     private final ProjectDAO dao;
     private Project project;
+    private boolean isValid;
         
     public ProjectLogic() {
         project = null;
         dao = new ProjectDAO();
+        isValid = false;
     }
 
-    public int setProject(Project project) {
-        int aux = 0;
-        if(DataValidator.isValid(project)){
-            this.project = project;
-            aux = 1;
-        }
-        return aux;
+    public void setProject(Project project) {
+        this.project = project;
     }
     
     public Project getProject() {
         return project;
     }
-    
-    public int saveNewProject(){
-        return dao.insertProject(project);
+
+    public void writeNewProject(){
+        dao.insertProject(project);
     }
    
     public int readProject(int idProject){
-        int aux = 0;
-        Project projectAux;
-        projectAux = dao.getProject(idProject);
-        if(projectAux != null){
-           this.project = projectAux;
-           aux = 1;
+        int notNullProject = 1;
+        this.project = dao.getProject(idProject);
+        if(this.project == null){
+            notNullProject = 0;
         }
-        return aux;
+
+        return notNullProject;
     }
     
     public int updateProject(){
@@ -47,5 +43,22 @@ public class ProjectLogic {
     
     public int deleteProject(){
         return dao.deleteProject(project.getId());
+    }
+    
+    public void addManager(int manager){
+        this.project.setIdOrganization(manager);
+    }
+    public void addOrganization(int organization){
+        this.project.setIdOrganization(organization);
+    }
+    
+    public boolean validate(){
+        if(DataValidator.isValid(this.project)){
+            this.isValid = true;
+        }
+        return this.isValid;
+    }
+    public boolean isValid(){
+        return this.isValid;
     }
 }

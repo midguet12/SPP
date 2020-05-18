@@ -22,7 +22,7 @@ public class ProjectDAO {
         int affectedRows = 0;
         connection = databaseConnection.getConnection();
         String query = "insert into project(project_name, description, responsabilities, activities,"
-                     + " duration, general_objetive, metodology, resources, id_manager, id_organization)"
+                     + " duration, general_objective, metodology, resources, id_manager, id_organization)"
                      + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         
         try {

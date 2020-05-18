@@ -30,7 +30,7 @@ public class OrganizationDAO {
             preparedStatement.setString(3, organization.geteMail());
             preparedStatement.setString(4, organization.getPhoneNumber());
             preparedStatement.setInt(5, organization.getIdState());
-            preparedStatement.setString(6, organization.getPhoneNumber());
+            preparedStatement.setString(6, organization.getCity());
             preparedStatement.setString(7, organization.getAddress());
             
             affectedRows = preparedStatement.executeUpdate();
