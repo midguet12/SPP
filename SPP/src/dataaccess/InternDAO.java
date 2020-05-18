@@ -1,4 +1,4 @@
-package dataaccess;
+ package dataaccess;
 
 import domain.Intern;
 import java.sql.Connection;
@@ -22,7 +22,7 @@ public class InternDAO {
         int affectedRows = 0;
         connection = databaseConnection.getConnection();
         String query = "insert into intern(id_intern, period, grade, id_project) "
-                     + "values(?, ?, ?, ?);"; //Consulta
+                     + "values(?, ?, ?, ?);";
         
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
