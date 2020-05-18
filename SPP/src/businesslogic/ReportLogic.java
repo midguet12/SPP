@@ -7,38 +7,34 @@ import utilities.DataValidator;
 public class ReportLogic {
     private final ReportDAO dao;
     private Report report;
+    private boolean isValid;
         
     public ReportLogic() {
         report = null;
         dao = new ReportDAO();
+        isValid = false;
     }
 
-    public int setReport(Report report) {
-        int aux = 0;
-        if(DataValidator.isValid(report)){
-            this.report = report;
-            aux = 1;
-        }
-        return aux;
+    public void setReport(Report report) {
+        this.report = report;
     }
     
     public Report getReport() {
         return report;
     }
-    
-    public int saveNewReport(){
-        return dao.insertReport(report);
+
+    public void writeNewReport(){
+        dao.insertReport(report);
     }
    
     public int readReport(int idReport){
-        int aux = 0;
-        Report reportAux;
-        reportAux = dao.getReport(idReport);
-        if(reportAux != null){
-           this.report = reportAux;
-           aux = 1;
+        int notNullReport = 1;
+        this.report = dao.getReport(idReport);
+        if(this.report == null){
+            notNullReport = 0;
         }
-        return aux;
+
+        return notNullReport;
     }
     
     public int updateReport(){
@@ -47,5 +43,15 @@ public class ReportLogic {
     
     public int deleteReport(){
         return dao.deleteReport(report.getId());
+    }
+    
+    public boolean validate(){
+        if(DataValidator.isValid(this.report)){
+            this.isValid = true;
+        }
+        return this.isValid;
+    }
+    public boolean isValid(){
+        return this.isValid;
     }
 }

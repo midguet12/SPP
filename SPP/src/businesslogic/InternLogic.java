@@ -7,38 +7,34 @@ import utilities.DataValidator;
 public class InternLogic {
     private final InternDAO dao;
     private Intern intern;
+    private boolean isValid;
         
     public InternLogic() {
         intern = null;
         dao = new InternDAO();
+        isValid = false;
     }
 
-    public int setIntern(Intern intern) {
-        int aux = 0;
-        if(DataValidator.isValid(intern)){
-            this.intern = intern;
-            aux = 1;
-        }
-        return aux;
+    public void setIntern(Intern intern) {
+        this.intern = intern;
     }
     
     public Intern getIntern() {
         return intern;
     }
-    
-    public int saveNewIntern(){
-        return dao.insertIntern(intern);
+
+    public void writeNewIntern(){
+        dao.insertIntern(intern);
     }
    
     public int readIntern(String idIntern){
-        int aux = 0;
-        Intern internAux;
-        internAux = dao.getIntern(idIntern);
-        if(internAux != null){
-           this.intern = internAux;
-           aux = 1;
+        int notNullIntern = 1;
+        this.intern = dao.getIntern(idIntern);
+        if(this.intern == null){
+            notNullIntern = 0;
         }
-        return aux;
+
+        return notNullIntern;
     }
     
     public int updateIntern(){
@@ -47,5 +43,15 @@ public class InternLogic {
     
     public int deleteIntern(){
         return dao.deleteIntern(intern.getIdIntern());
+    }
+    
+    public boolean validate(){
+        if(DataValidator.isValid(this.intern)){
+            this.isValid = true;
+        }
+        return this.isValid;
+    }
+    public boolean isValid(){
+        return this.isValid;
     }
 }

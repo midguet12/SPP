@@ -7,38 +7,34 @@ import utilities.DataValidator;
 public class ActivityLogic {
     private final ActivityDAO dao;
     private Activity activity;
+    private boolean isValid;
         
     public ActivityLogic() {
         activity = null;
         dao = new ActivityDAO();
+        isValid = false;
     }
 
-    public int setActivity(Activity activity) {
-        int aux = 0;
-        if(DataValidator.isValid(activity)){
-            this.activity = activity;
-            aux = 1;
-        }
-        return aux;
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
     
     public Activity getActivity() {
         return activity;
     }
-    
-    public int saveNewActivity(){
-        return dao.insertActivity(activity);
+
+    public void writeNewActivity(){
+        dao.insertActivity(activity);
     }
    
     public int readActivity(int idActivity){
-        int aux = 0;
-        Activity activityAux;
-        activityAux = dao.getActivity(idActivity);
-        if(activityAux != null){
-           this.activity = activityAux;
-           aux = 1;
+        int notNullActivity = 1;
+        this.activity = dao.getActivity(idActivity);
+        if(this.activity == null){
+            notNullActivity = 0;
         }
-        return aux;
+
+        return notNullActivity;
     }
     
     public int updateActivity(){
@@ -47,5 +43,15 @@ public class ActivityLogic {
     
     public int deleteActivity(){
         return dao.deleteActivity(activity.getId());
+    }
+    
+    public boolean validate(){
+        if(DataValidator.isValid(this.activity)){
+            this.isValid = true;
+        }
+        return this.isValid;
+    }
+    public boolean isValid(){
+        return this.isValid;
     }
 }
