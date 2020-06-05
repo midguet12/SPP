@@ -12,39 +12,51 @@ import java.util.logging.Logger;
 import org.apache.commons.net.ftp.FTPClient;
 
 public class FileClient {
-    String serverPath = "/mnt/user/spp";
-    String server = "midguet.ddns.net";
+    
+    String serverPath = "/FTP";
+    String user = "upload";
+    String server = "midguetg.ddns.net";
     String password = "Magt2208";
 
-    String path = "/mnt/user/spp";
-    File file = null;
+    
+    String path = "/FTP";
+    File file = new File("hola.pdf");
     
     FTPClient ftp = new FTPClient();
+    
+    
+        
 
-    public FileClient() {
+    public FileClient(){
         try {
             ftp.connect(server);
-        }
-        catch (IOException ex) {
-            Logger.getLogger(FileClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            
+            
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } 
     }
     
     public boolean insertFile(){
+        
         boolean b = false;
+        
         try {
             
-            ftp.login(server, password);
+            ftp.login(user, password);
+            
             ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftp.changeWorkingDirectory(path);
+                
+            b = ftp.storeFile("hola.pdf",  new FileInputStream(file));
             
-            b = ftp.storeFile("hola.pdf",  new FileInputStream(file)); 
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(FileClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return b;
-
+        
     }
     
     public boolean getFile(){
@@ -52,7 +64,11 @@ public class FileClient {
         
         OutputStream out;
         try {
-            ftp.login(server, password);
+            System.out.println("hola");
+            b = ftp.login(user, password);
+            
+            
+            
             ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftp.changeWorkingDirectory(path);
             
@@ -61,8 +77,11 @@ public class FileClient {
             out.close();
             
         } catch (Exception ex) {
-            Logger.getLogger(FileClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            System.out.println(ex.getMessage());
+        } 
         return b;
-    }    
+        
+    }
+    
+    
 }
