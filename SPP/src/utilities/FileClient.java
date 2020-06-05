@@ -20,7 +20,9 @@ public class FileClient {
 
     
     String path = "/FTP";
-    File file = new File("hola.pdf");
+    File file = null;
+    
+    
     
     FTPClient ftp = new FTPClient();
     
@@ -29,6 +31,7 @@ public class FileClient {
 
     public FileClient(){
         try {
+            this.file = file;
             ftp.connect(server);
             
             
@@ -36,6 +39,11 @@ public class FileClient {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         } 
+    }
+    
+    public void choseFile(File file){
+        this.file = file;
+        
     }
     
     public boolean insertFile(){
@@ -49,7 +57,7 @@ public class FileClient {
             ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftp.changeWorkingDirectory(path);
                 
-            b = ftp.storeFile("hola.pdf",  new FileInputStream(file));
+            b = ftp.storeFile(file.getName(),  new FileInputStream(file));
             
         } catch (IOException ex) {
             Logger.getLogger(FileClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,12 +67,13 @@ public class FileClient {
         
     }
     
-    public boolean getFile(){
+    public boolean getFile(File file){
         boolean b = false;
+        this.file = file;
         
         OutputStream out;
         try {
-            System.out.println("hola");
+                
             b = ftp.login(user, password);
             
             
@@ -73,12 +82,13 @@ public class FileClient {
             ftp.changeWorkingDirectory(path);
             
             out = new BufferedOutputStream(new FileOutputStream(file));
-            b = ftp.retrieveFile(file.getName(), out);
+            b = ftp.retrieveFile("PCS.txt", out);
             out.close();
             
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         } 
+        
         return b;
         
     }

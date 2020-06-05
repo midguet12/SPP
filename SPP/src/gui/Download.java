@@ -1,28 +1,33 @@
-package spp;
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gui;
 
 import java.io.File;
 import java.io.FileInputStream;
-import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import utilities.FileClient;
 
+/**
+ *
+ * @author midgu
+ */
+public class Download extends Application {
 
-
-
-public class SPP extends Application{   
-    
-    @Override    
-    public void start(Stage primaryStage){
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
         primaryStage.setTitle("Descargar archivo");
         primaryStage.setHeight(720);
@@ -70,17 +75,6 @@ public class SPP extends Application{
         Scene scene = new Scene(panel, 1280,720);
         primaryStage.setScene(scene);
         primaryStage.show();
-        
-        
-        
     }
-        
-    public static void main(String[] args) {
-        
-        launch(args);
-        
-        
-        
-        
-    }
+    
 }
