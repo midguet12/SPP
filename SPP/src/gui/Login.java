@@ -10,6 +10,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -62,16 +63,19 @@ public class Login extends Application{
         button.setStyle("-fx-background-color: #2196F3;-fx-text-fill: white;");
         
         
-        
+      
 
         VBox panel = new VBox();
         panel.setStyle("-fx-background-color: black");
         panel.setAlignment(Pos.CENTER);
         panel.setSpacing(8);
+        
         panel.getChildren().add(imageView);
         panel.getChildren().add(user);
         panel.getChildren().add(password);
         panel.getChildren().add(button);
+        
+      
         
         
              

@@ -1,8 +1,11 @@
-package spp;
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gui;
 
 import java.io.FileInputStream;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,16 +18,15 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import utilities.PDFCreator;
 
+/**
+ *
+ * @author midgu
+ */
+public class GeneratePDF extends Application{
 
-
-
-
-
-public class SPP extends Application{   
-    
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         primaryStage.setTitle("Generar pdf");
         primaryStage.setHeight(720);
         primaryStage.setWidth(1280);
@@ -69,20 +71,4 @@ public class SPP extends Application{
         
     }
     
-    
-    
-        
-    public static void main(String[] args) {
-        
-       
-        
-        
-            
-        
-        launch(args);
-        
-        
-        
-        
-    }
 }
