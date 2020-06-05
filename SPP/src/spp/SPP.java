@@ -1,30 +1,12 @@
 package spp;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+import businesslogic.UserLogic;
+import dataaccess.UserDAO;
 
-
-
-
-
-
-public class SPP extends Application{   
-    
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    
-        //El codigo de la clase que quieres ejecutar va aqui
-    }
-    
-    
-    
-        
+public class SPP{             
     public static void main(String[] args) {
+        UserDAO userdao = new UserDAO();
         
-        System.out.println("Hola");
-        
-        
-        
-        
+        System.out.println(userdao.getUser("1814123"));
     }
 }

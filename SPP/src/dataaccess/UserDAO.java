@@ -52,15 +52,14 @@ public class UserDAO {
         return affectedRows;
     }
     public User getUser(String idUser){
-        User user = null;
-        connection = databaseConnection.getConnection();
-        //String query = "Select * from user where id_user = " +idUser+ ";";        
+        User user = new User("Not found");
+        connection = databaseConnection.getConnection();     
         String query = "Select * from user LEFT JOIN user_type ON user.id_type = user_type.id_type where id_user = ?;";
 
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, idUser);
-            resultSet = preparedStatement.executeQuery(); //Obtencion de datos de consulta
+            preparedStatement.setString(1, idUser);            
+            resultSet = preparedStatement.executeQuery();
             resultSet.next();
             
             user = new User(
