@@ -1,6 +1,17 @@
 create database spp;
 use spp;
 
+create table manager(
+	id_manager INTEGER auto_increment not null,
+	name VARCHAR(30) not null,
+	middlename VARCHAR(30) not null,
+	lastname VARCHAR(30),
+	position VARCHAR(30),
+	email VARCHAR(50) not null,
+	id_organization INTEGER not null,
+	primary key(id_manager)
+);
+
 create table organization(
 	id_organization INTEGER auto_increment not null,
 	name VARCHAR(30) not null,	
@@ -11,6 +22,12 @@ create table organization(
 	city VARCHAR(30) not null,
 	address VARCHAR(30) not null,
 	primary key(id_organization)
+);
+
+create table state(
+	id_state INTEGER,
+	state VARCHAR(35),
+	primary key(id_state)
 );
 
 
@@ -29,24 +46,34 @@ create table project(
 	primary key(id_project)
 );
 
+create table report_type(
+	id_type INTEGER auto_increment not null,
+	type VARCHAR(15) not null,
+	primary key(id_type)
+
+);
+
+create table report(
+	id_report integer auto_increment not null,
+	id_type integer not null,
+	id_document integer not null,
+	description VARCHAR(200),
+	score integer, 
+	id_intern VARCHAR(15) not null,
+	hours integer,
+	primary key(id_report)
+);
+
+
 create table intern(
 	id_intern VARCHAR(15) not null,
 	period VARCHAR(20),
 	grade INTEGER,
 	id_project INTEGER,
+	progress integer,
 	primary key (id_intern)
 );
 
-create table report(
-	id_report integer auto_increment not null,
-	id_type VARCHAR(15) not null,
-	description VARCHAR(200),
-	filepath VARCHAR(100) not null,
-	grade INTEGER,
-	upload_date DATE not null,
-	id_intern VARCHAR(15) not null,
-	primary key(id_report)
-);
 
 create table activity(
 	id_activity INTEGER auto_increment not null,
@@ -54,9 +81,26 @@ create table activity(
 	value VARCHAR(20) not null,
 	description VARCHAR(30),
 	upload_date DATE not null,
-	id_intern VARCHAR(15) not null,
+	id_user VARCHAR(15) not null,
 	primary key(id_activity)
 );
+
+create table activity_delivered(
+	id_activity_delivered integer auto_increment not null,
+	id_activity integer not null,
+	id_document integer,
+	id_intern VARCHAR(15),
+	primary key(id_activity_delivered)
+);
+
+create table document(
+	id_document INTEGER auto_increment not null,
+	file_path VARCHAR(200) not null,
+	upload_date DATE not null,
+	primary key(id_document)
+);
+
+
 
 create table user(
 	id_user VARCHAR(15) not null,
@@ -72,54 +116,12 @@ create table user(
 
 
 
-
-create table document(
-	id_document INTEGER auto_increment not null,
-	file_path VARCHAR(200) not null,
-	upload_date DATE not null,
-	id_intern VARCHAR(15),
-	id_type INTEGER,
-	primary key(id_document)
-);
-
-
-create table state(
-	id_state INTEGER,
-	state VARCHAR(35),
-	primary key(id_state)
-);
-
-
-create table manager(
-	id_manager INTEGER auto_increment not null,
-	name VARCHAR(30) not null,
-	middlename VARCHAR(30) not null,
-	lastname VARCHAR(30),
-	position VARCHAR(30),
-	email VARCHAR(50) not null,
-	id_organization INTEGER not null,
-	primary key(id_manager)
-);
-
 create table user_type(
 	id_type INTEGER auto_increment not null,
 	type VARCHAR(15) not null,
 	primary key(id_type)
 );
 
-create table document_type(
-	id_type INTEGER auto_increment not null,
-	type VARCHAR(15) not null,
-	primary key(id_type)
-	
-);
-
-create table report_type(
-	id_type INTEGER auto_increment not null,
-	type VARCHAR(15) not null,
-	primary key(id_type)
-
-);
 
 insert into user_type(type) values 
 	('Coordinador'),
@@ -134,6 +136,19 @@ alter table project add CONSTRAINT fk_project_organization FOREIGN key (id_organ
 alter table manager add CONSTRAINT fk_manager_organization FOREIGN key (id_organization) REFERENCES organization(id_organization);
 alter table intern add CONSTRAINT fk_intern_project FOREIGN key (id_project) REFERENCES project(id_project);
 alter table intern add CONSTRAINT fk_intern_user FOREIGN key (id_intern) REFERENCES user(id_user);
+alter table report add CONSTRAINT fk_report_type FOREIGN key (id_type) REFERENCES report_type(id_type);
+alter table report add CONSTRAINT fk_report_document FOREIGN key (id_document) REFERENCES document(id_document);
+alter table report add CONSTRAINT fk_report_intern FOREIGN key (id_intern) REFERENCES intern(id_intern);
+alter table user add CONSTRAINT fk_user_type FOREIGN key (id_type) REFERENCES user_type(id_type);
+alter table activity add CONSTRAINT fk_activity_user FOREIGN key (id_user) references user(id_user);
+alter table activity_delivered add CONSTRAINT fk_activity_delivered_activity FOREIGN key (id_activity) references activity(id_activity);
+alter table activity_delivered add CONSTRAINT fk_activity_delivered_document FOREIGN key (id_document) references document(id_document);
+alter table activity_delivered add CONSTRAINT fk_activity_delivered_intern FOREIGN key (id_intern) references intern(id_intern);
+
+
+
+
+
 
 INSERT INTO state(id_state, state) VALUES
 (1, 'Aguascalientes'),

@@ -12,57 +12,86 @@ import java.util.logging.Logger;
 import org.apache.commons.net.ftp.FTPClient;
 
 public class FileClient {
-    String serverPath = "/mnt/user/spp";
-    String server = "midguet.ddns.net";
+    
+    String serverPath = "/FTP";
+    String user = "upload";
+    String server = "midguetg.ddns.net";
     String password = "Magt2208";
 
-    String path = "/mnt/user/spp";
+    
+    String path = "/FTP";
     File file = null;
     
+    
+    
     FTPClient ftp = new FTPClient();
+    
+    
+        
 
-    public FileClient() {
+    public FileClient(){
         try {
+            this.file = file;
             ftp.connect(server);
-        }
-        catch (IOException ex) {
-            Logger.getLogger(FileClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            
+            
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } 
+    }
+    
+    public void choseFile(File file){
+        this.file = file;
+        
     }
     
     public boolean insertFile(){
+        
         boolean b = false;
+        
         try {
             
-            ftp.login(server, password);
+            ftp.login(user, password);
+            
             ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftp.changeWorkingDirectory(path);
+                
+            b = ftp.storeFile(file.getName(),  new FileInputStream(file));
             
-            b = ftp.storeFile("hola.pdf",  new FileInputStream(file)); 
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(FileClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return b;
-
+        
     }
     
-    public boolean getFile(){
+    public boolean getFile(File file){
         boolean b = false;
+        this.file = file;
         
         OutputStream out;
         try {
-            ftp.login(server, password);
+                
+            b = ftp.login(user, password);
+            
+            
+            
             ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftp.changeWorkingDirectory(path);
             
             out = new BufferedOutputStream(new FileOutputStream(file));
-            b = ftp.retrieveFile(file.getName(), out);
+            b = ftp.retrieveFile("PCS.txt", out);
             out.close();
             
         } catch (Exception ex) {
-            Logger.getLogger(FileClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            System.out.println(ex.getMessage());
+        } 
+        
         return b;
-    }    
+        
+    }
+    
+    
 }

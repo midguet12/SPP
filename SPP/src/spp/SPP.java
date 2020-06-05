@@ -1,12 +1,30 @@
 package spp;
 
-import dataaccess.UserDAO;
-import domain.User;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class SPP {
+
+
+
+
+
+public class SPP extends Application{   
+    
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+    
+        //El codigo de la clase que quieres ejecutar va aqui
+    }
+    
+    
+    
+        
     public static void main(String[] args) {
-        UserDAO userDAO = new UserDAO();
-        User user = userDAO.getUser("18012193");
-        System.out.println(user);
+        
+        System.out.println("Hola");
+        
+        
+        
+        
     }
 }
