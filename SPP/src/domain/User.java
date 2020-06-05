@@ -33,6 +33,10 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.type = type;
     }
+
+    public User(String idUser) {
+        this.idUser = idUser;
+    }
     
     public String getIdUser() {
         return idUser;
